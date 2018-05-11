@@ -34,10 +34,24 @@ CREATE TABLE user (
   PRIMARY KEY(id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-#用户角色表
-DROP TABLE IF EXISTS sys_role;
+DROP TABLE IF EXISTS family_relationship;
 
-CREATE TABLE sys_role (
+CREATE TABLE family_relationship (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  user_id BIGINT NOT NULL COMMENT '用户Id',
+  relationship VARCHAR(30) COMMENT '与当事人关系',
+  name VARCHAR(50) COMMENT '姓名',
+  age INT COMMENT '年龄',
+  degree_of_education SMALLINT DEFAULT 0 COMMENT '文化程度',
+  jpb VARCHAR(30) COMMENT '工作',
+  phone VARCHAR(30) COMMENT '联系方式',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+#用户角色表
+DROP TABLE IF EXISTS role;
+
+CREATE TABLE role (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '角色唯一标识ID',
   name VARCHAR(200) NOT NULL COMMENT '角色名称',
   description VARCHAR(300) COMMENT '角色描述',
@@ -48,10 +62,10 @@ CREATE TABLE sys_role (
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 #权限表
-DROP TABLE IF EXISTS sys_permission;
-CREATE TABLE sys_permission (
+DROP TABLE IF EXISTS permission;
+CREATE TABLE permission (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '资源唯一标识ID',
-  parent_id INT COMMENT '父级菜单Id',
+  parent_id BIGINT COMMENT '父级菜单Id',
   parent_ids VARCHAR(300) COMMENT '父级编号列表',
   name VARCHAR(200) NOT NULL COMMENT '资源名称',
   icon VARCHAR(100) DEFAULT '' COMMENT '图标',
@@ -66,9 +80,9 @@ CREATE TABLE sys_permission (
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 #用户、角色关联表
-DROP TABLE IF EXISTS sys_user_role;
+DROP TABLE IF EXISTS user_role;
 
-CREATE TABLE sys_user_role (
+CREATE TABLE user_role (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '唯一标识ID',
   user_id BIGINT NOT NULL COMMENT '用户唯一标识ID',
   role_id BIGINT NOT NULL COMMENT '角色唯一标识ID',
@@ -79,9 +93,9 @@ CREATE TABLE sys_user_role (
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 #角色、权限关联表
-DROP TABLE IF EXISTS sys_role_permission;
+DROP TABLE IF EXISTS role_permission;
 
-CREATE TABLE sys_role_permission (
+CREATE TABLE role_permission (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '唯一标识ID',
   role_id BIGINT NOT NULL COMMENT '角色唯一标识ID',
   permission_id BIGINT NOT NULL COMMENT '权限唯一标识ID',
