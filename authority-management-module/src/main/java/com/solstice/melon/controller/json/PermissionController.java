@@ -1,13 +1,13 @@
 package com.solstice.melon.controller.json;
 
-import com.boom.domain.Permission;
-import com.boom.enums.HttpStatus;
-import com.boom.service.IPermissionService;
-import com.boom.utils.TreeNode;
-import com.boom.vo.ResultVo;
-import com.github.pagehelper.PageInfo;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import com.base.enums.HttpStatus;
+import com.solstice.melon.domain.Permission;
+import com.solstice.melon.service.IPermissionService;
+import com.solstice.melon.utils.TreeNode;
 import com.summer.base.utils.ObjectUtils;
-import org.apache.shiro.authz.annotation.RequiresRoles;
+import com.summer.base.utils.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +63,9 @@ public class PermissionController {
         log.info("Controller layer:分页查询所有权限信息=========>PermissionController.listAllAndPagination({},{})",
                 pageNum,pageSize);
 
-        List<Permission> permissions = permissionService.queryAllAndPagination(pageNum,pageSize);
-        if (ObjectUtils.isNotEmpty(permissions)) {
-            PageInfo<Permission> pageInfo = new PageInfo<>(permissions);
-            return ResultVo.success(pageInfo);
+        Page<Permission> permissions = permissionService.queryAllAndPagination(pageNum,pageSize);
+        if (ObjectUtils.isNotEmpty(permissions.getRecords())) {
+            return ResultVo.success(permissions);
         }
         return ResultVo.fail("查询权限信息失败");
     }

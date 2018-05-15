@@ -3,6 +3,7 @@ package com.solstice.melon.utils;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.solstice.melon.exception.ControllerException;
 import com.solstice.melon.exception.ServiceException;
+import com.summer.base.utils.ResultVo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;

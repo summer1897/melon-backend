@@ -1,24 +1,20 @@
 package com.solstice.melon.controller.json;
 
 import com.alibaba.fastjson.JSON;
-
-import com.boom.controller.vo.UserVo;
-import com.boom.domain.User;
-import com.boom.enums.HttpStatus;
-import com.boom.manager.IUserManager;
-import com.boom.service.IUserService;
-import com.boom.service.dto.Node;
-import com.boom.service.dto.SimpleRoleDto;
-import com.boom.utils.EncryptionUtils;
-import com.boom.utils.MapBuilder;
-import com.boom.utils.MapUtils;
-import com.boom.utils.RandomIdGenerator;
-import com.boom.vo.ResultVo;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.base.enums.HttpStatus;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.summer.base.utils.BeanCloneUtils;
-import com.summer.base.utils.ObjectUtils;
-import com.summer.base.utils.StringUtils;
+import com.solstice.melon.controller.vo.UserVo;
+import com.solstice.melon.domain.User;
+import com.solstice.melon.manager.IUserManager;
+import com.solstice.melon.service.IUserService;
+import com.solstice.melon.service.dto.Node;
+import com.solstice.melon.service.dto.SimpleRoleDto;
+import com.solstice.melon.utils.EncryptionUtils;
+import com.solstice.melon.utils.MapBuilder;
+import com.solstice.melon.utils.MapUtils;
+import com.summer.base.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,13 +60,12 @@ public class UserController {
     public ResultVo lists(@PathVariable Integer pageNum,@PathVariable Integer pageSize) {
         log.info("method:GET ===> request path:/user/list===>UserController.list({},{})",pageNum,pageSize);
 
-        List<User> users = userService.queryAllByPagination(pageNum,pageSize);
+        Page<User> pageUsers = userService.queryAllByPagination(pageNum,pageSize);
+        List<User> users = pageUsers.getRecords();
         if (ObjectUtils.isNotEmpty(users)) {
-            PageInfo<User> pageInfo = new PageInfo<>(users);
-            long total = pageInfo.getTotal();
             List<UserVo> userVos = BeanCloneUtils.clone(users, User.class, UserVo.class);
             MapBuilder<String, Object> data = MapUtils.builder();
-            data.putVal("total",total).putVal("userLists",userVos);
+            data.putVal("total",pageUsers.getTotal()).putVal("userLists",userVos);
             return ResultVo.success(HttpStatus.STATUS_OK,data);
         }
         return ResultVo.fail("没有查到用户信息");
