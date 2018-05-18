@@ -1,8 +1,8 @@
 package com.solstice.melon.config.shiro;
 
-import com.dlsjy.dxzx.domain.AccountCredentials;
-import com.dlsjy.dxzx.manager.IAccountCredentialsManager;
-import com.dlsjy.dxzx.service.IAccountCredentialsService;
+import com.solstice.melon.domain.AccountCredentials;
+import com.solstice.melon.manager.IAccountCredentialsManager;
+import com.solstice.melon.service.IAccountCredentialsService;
 import com.solstice.melon.vo.Principal;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.ObjectUtils;

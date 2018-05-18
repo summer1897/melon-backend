@@ -44,10 +44,29 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  application:
+    name: melon-api
+
+#  dubbo:
+#      provider:
+#        service:
+#          version: 1.0.0
+#      basePackages: com.solstice.melon.service
+#      registry:
+#        id: melon-dubbo
+#        address: zookeeper://127.0.0.1:2181
+#      application:
+#        id: dubbo-provider-melon
+#        name: dubbo-provider-melon
+#      protocal:
+#        id: dubbo
+#        name: dubbo
+#        port: 20880
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   type-aliases-package: com.solstice.melon.domain
+#  type-handlers-package: com.solstice.melon.typeHandlers
   global-config:
       #刷新mapper 调试神器
       refresh-mapper: true

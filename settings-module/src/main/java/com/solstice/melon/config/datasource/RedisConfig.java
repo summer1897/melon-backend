@@ -26,8 +26,8 @@ import java.lang.reflect.Method;
  * @Time 16:07
  * @Description Redis 配置
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
     private static final Logger log = LoggerFactory.getLogger(RedisConfig.class);

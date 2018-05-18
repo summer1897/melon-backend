@@ -31,7 +31,7 @@ public class PoliticalStatusEnumTypeHandler extends BaseTypeHandler<PoliticalSta
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, PoliticalStatus politicalStatus, JdbcType jdbcType) throws SQLException {
         log.info("SexEnumTypeHandler.setNonNullParameter()");
-        preparedStatement.setInt(i,politicalStatus.getCode());
+        preparedStatement.setInt(i,politicalStatus.getValue());
     }
 
     @Override

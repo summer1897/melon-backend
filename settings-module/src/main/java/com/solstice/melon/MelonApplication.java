@@ -1,4 +1,4 @@
-package com.dlsjy.dxzx;
+package com.solstice.melon;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

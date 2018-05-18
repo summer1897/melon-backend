@@ -1,8 +1,11 @@
 package com.solstice.melon.enums;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.summer.base.utils.ObjectUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Intellij IDEA
@@ -13,7 +16,7 @@ import java.util.List;
  * @Time 17:26
  * @Description 政治面貌枚举
  */
-public enum PoliticalStatus {
+public enum PoliticalStatus implements BaseEnum {
 
     CHINESE_COMMUNIST_PARTY_MEMBER(1,"中共党员","Chinese Communist Party Member"),
     CHINESE_PROBATIONARY_COMMUNIST_PARTY_MEMBER(2,"中共预备党员","Chinese Probationary Communist Party Member"),
@@ -34,6 +37,14 @@ public enum PoliticalStatus {
     private String description;
     private String eDescription;
 
+    private static Map<Integer,PoliticalStatus> valueMap = Maps.newHashMap();
+
+    static {
+        for (PoliticalStatus politicalStatus : values()) {
+            valueMap.put(politicalStatus.code,politicalStatus);
+        }
+    }
+
     PoliticalStatus(int code,String description,String eDescription) {
         this.code = code;
         this.description = description;
@@ -41,39 +52,28 @@ public enum PoliticalStatus {
     }
 
     public static PoliticalStatus indexOf(int code) {
-        if (code < 0 || code > values().length) {
-            return null;
+        PoliticalStatus politicalStatus = valueMap.get(code);
+        if(ObjectUtils.isNull(politicalStatus)) {
+            throw new IllegalArgumentException("没有找着对应的政治面貌枚举类型" + code);
         }
-        PoliticalStatus[] politicalStatuses = values();
-        return politicalStatuses[code];
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+        return politicalStatus;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String geteDescription() {
         return eDescription;
     }
 
-    public void seteDescription(String eDescription) {
-        this.eDescription = eDescription;
+    @Override
+    public int getValue() {
+        return this.code;
     }
 
     @Override
     public String toString() {
-        return this.description;
+        return this.description + "--" + this.eDescription;
     }
 }

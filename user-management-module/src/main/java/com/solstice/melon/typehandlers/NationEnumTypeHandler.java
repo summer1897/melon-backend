@@ -32,7 +32,7 @@ public class NationEnumTypeHandler extends BaseTypeHandler<Nation> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, Nation nation, JdbcType jdbcType) throws SQLException {
         log.info("SexEnumTypeHandler.setNonNullParameter()");
-        preparedStatement.setInt(i,nation.getCode());
+        preparedStatement.setInt(i,nation.getValue());
     }
 
     @Override

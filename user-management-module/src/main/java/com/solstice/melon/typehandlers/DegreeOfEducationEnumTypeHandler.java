@@ -32,7 +32,7 @@ public class DegreeOfEducationEnumTypeHandler extends BaseTypeHandler<DegreeOfEd
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, DegreeOfEducation degreeOfEducation, JdbcType jdbcType) throws SQLException {
         log.info("SexEnumTypeHandler.setNonNullParameter()");
-        preparedStatement.setInt(i,degreeOfEducation.getCode());
+        preparedStatement.setInt(i,degreeOfEducation.getValue());
     }
 
     @Override

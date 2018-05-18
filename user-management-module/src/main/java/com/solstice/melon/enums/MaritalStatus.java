@@ -1,5 +1,10 @@
 package com.solstice.melon.enums;
 
+import com.google.common.collect.Maps;
+import com.summer.base.utils.ObjectUtils;
+
+import java.util.Map;
+
 /**
  * Created by Intellij IDEA
  *
@@ -9,50 +14,51 @@ package com.solstice.melon.enums;
  * @Time 17:15
  * @Description 婚姻状况枚举
  */
-public enum MaritalStatus {
+public enum MaritalStatus implements BaseEnum {
 
-    UNMARRIED(0,"未婚","unmarried"),MARRIED(1,"已婚","married");
+    UNMARRIED(0, "未婚", "unmarried"), MARRIED(1, "已婚", "married");
 
     private int code;
     private String description;
     private String eDescription;
+    private static Map<Integer, MaritalStatus> valueMap = Maps.newHashMap();
 
-    MaritalStatus(int code,String description,String eDescription) {
+    static {
+        for (MaritalStatus maritalStatus : values()) {
+            valueMap.put(maritalStatus.code, maritalStatus);
+        }
+    }
+
+    MaritalStatus(int code, String description, String eDescription) {
         this.code = code;
         this.description = description;
         this.eDescription = eDescription;
     }
 
     public static MaritalStatus indexOf(int code) {
-        if (0 == code) {
-            return UNMARRIED;
-        } else if (1 == code) {
-            return MARRIED;
+        MaritalStatus maritalStatus = valueMap.get(code);
+        if(ObjectUtils.isNull(maritalStatus)) {
+            throw new IllegalArgumentException("没有对应的婚姻状态枚举类型" + code);
         }
-        return null;
+        return maritalStatus;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    @Override
+    public int getValue() {
+        return this.code;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String geteDescription() {
         return eDescription;
     }
 
-    public void seteDescription(String eDescription) {
-        this.eDescription = eDescription;
+    @Override
+    public String toString() {
+        return this.description + "--" + this.eDescription;
     }
+
 }

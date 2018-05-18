@@ -71,7 +71,7 @@ public class User extends BaseDomain implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date entryOfTime;
+    private Date timeOfEntry;
 
 
     public String getUserName() {
@@ -178,12 +178,12 @@ public class User extends BaseDomain implements Serializable {
         this.currentAddress = currentAddress;
     }
 
-    public Date getEntryOfTime() {
-        return entryOfTime;
+    public void setTimeOfEntry(Date timeOfEntry) {
+        this.timeOfEntry = timeOfEntry;
     }
 
-    public void setEntryOfTime(Date entryOfTime) {
-        this.entryOfTime = entryOfTime;
+    public Date getTimeOfEntry() {
+        return this.timeOfEntry;
     }
 
     /**

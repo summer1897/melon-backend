@@ -1,5 +1,10 @@
 package com.solstice.melon.enums;
 
+import com.google.common.collect.Maps;
+import com.summer.base.utils.ObjectUtils;
+
+import java.util.Map;
+
 /**
  * Created by Intellij IDEA
  *
@@ -9,7 +14,7 @@ package com.solstice.melon.enums;
  * @Time 10:34
  * @Description 学位枚举
  */
-public enum AcademicDegree {
+public enum AcademicDegree implements BaseEnum {
 
     NON(0,"文盲","illiteracy"),
     PRIMARY_SCHOOL(1,"小学","primary school"),
@@ -26,6 +31,14 @@ public enum AcademicDegree {
     private String desc;
     private String eDesc;
 
+    private static Map<Integer,AcademicDegree> valueMap = Maps.newHashMap();
+
+    static {
+        for (AcademicDegree academicDegree : values()) {
+            valueMap.put(academicDegree.code,academicDegree);
+        }
+    }
+
     AcademicDegree(int code, String desc, String eDesc) {
         this.code = code;
         this.desc = desc;
@@ -33,34 +46,28 @@ public enum AcademicDegree {
     }
 
     public static AcademicDegree indexOf(int code) {
-        AcademicDegree[] academicDegrees = values();
-        if (code < 0 || code > academicDegrees.length) {
-            return null;
+        AcademicDegree academicDegree = valueMap.get(code);
+        if (ObjectUtils.isNull(academicDegree)) {
+            throw new IllegalArgumentException("没有找着对应的学位枚举类型" + code);
         }
-        return academicDegrees[code];
+        return academicDegree;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    @Override
+    public int getValue() {
+        return this.code;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public String geteDesc() {
         return eDesc;
     }
 
-    public void seteDesc(String eDesc) {
-        this.eDesc = eDesc;
+    @Override
+    public String toString() {
+        return this.desc + "--" + this.eDesc;
     }
 }

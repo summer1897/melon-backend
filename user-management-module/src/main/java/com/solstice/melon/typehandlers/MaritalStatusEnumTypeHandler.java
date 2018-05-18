@@ -32,7 +32,7 @@ public class MaritalStatusEnumTypeHandler extends BaseTypeHandler<MaritalStatus>
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, MaritalStatus maritalStatus, JdbcType jdbcType) throws SQLException {
         log.info("SexEnumTypeHandler.setNonNullParameter()");
-        preparedStatement.setInt(i,maritalStatus.getCode());
+        preparedStatement.setInt(i,maritalStatus.getValue());
     }
 
     @Override

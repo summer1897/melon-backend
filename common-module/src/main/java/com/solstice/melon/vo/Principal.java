@@ -35,14 +35,9 @@ public class Principal implements Serializable {
     private Long id;
     private String userName;
     private String nickName;
-    private Byte sex;
     private String phone;
     private String email;
     private Byte locked;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date birthday;
-
 
     public Long getId() {
         return id;
@@ -66,14 +61,6 @@ public class Principal implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
     }
 
     public String getPhone() {
@@ -100,11 +87,4 @@ public class Principal implements Serializable {
         this.locked = locked;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
 }

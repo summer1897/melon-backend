@@ -1,5 +1,10 @@
 package com.solstice.melon.enums;
 
+import com.google.common.collect.Maps;
+import com.summer.base.utils.ObjectUtils;
+
+import java.util.Map;
+
 /**
  * Created by Intellij IDEA
  *
@@ -9,7 +14,7 @@ package com.solstice.melon.enums;
  * @Time 10:03
  * @Description 性别枚举
  */
-public enum Sex {
+public enum Sex implements BaseEnum {
 
     MALE(0,"男","male"),FEMALE(1,"女","female");
 
@@ -26,6 +31,14 @@ public enum Sex {
      */
     private String eSex;
 
+    private static Map<Integer,Sex> valueMap = Maps.newHashMap();
+
+    static {
+        for (Sex sex : values()) {
+            valueMap.put(sex.code,sex);
+        }
+    }
+
     Sex(int code,String sex,String eSex) {
         this.code = code;
         this.sex = sex;
@@ -33,37 +46,29 @@ public enum Sex {
     }
 
     public static Sex indexOf(int code) {
-        if (0 == code) {
-            return MALE;
-        } else if (1 == code) {
-            return FEMALE;
-        } else {
-            return null;
+        Sex sex = valueMap.get(code);
+        if(ObjectUtils.isNull(sex)) {
+            throw new IllegalArgumentException("没有对应的性别枚举类型" + code);
         }
+        return sex;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    @Override
+    public int getValue() {
+        return this.code;
     }
 
     public String getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String geteSex() {
         return eSex;
     }
 
-    public void seteSex(String eSex) {
-        this.eSex = eSex;
+    @Override
+    public String toString() {
+        return this.sex + "--" + this.eSex;
     }
 
 }

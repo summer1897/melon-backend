@@ -3,15 +3,11 @@ package com.solstice.melon.service.impl;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
-import com.google.common.collect.Lists;
 import com.solstice.melon.dao.UserMapper;
 import com.solstice.melon.domain.User;
 import com.solstice.melon.service.IUserService;
-import com.summer.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

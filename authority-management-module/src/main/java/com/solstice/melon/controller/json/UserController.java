@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.base.enums.HttpStatus;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.solstice.melon.annotations.CurrentUser;
 import com.solstice.melon.controller.vo.UserVo;
 import com.solstice.melon.domain.User;
 import com.solstice.melon.manager.IUserManager;
@@ -14,6 +15,7 @@ import com.solstice.melon.service.dto.SimpleRoleDto;
 import com.solstice.melon.utils.EncryptionUtils;
 import com.solstice.melon.utils.MapBuilder;
 import com.solstice.melon.utils.MapUtils;
+import com.solstice.melon.vo.Principal;
 import com.summer.base.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,12 +47,11 @@ public class UserController {
     }
 
     @GetMapping(value = "/lists.json")
-    public ResultVo lists() {
-        log.info("method:GET ===> request path:/user/list===>UserController.list()");
+    public ResultVo lists(@CurrentUser Principal currentUser) {
+        log.info("method:GET ===> request path:/user/list===>UserController.list({})",JSON.toJSONString(currentUser,true));
 
         List<User> users = userService.queryAll();
         if (ObjectUtils.isNotEmpty(users)) {
-//            log.warn("uservo infos:{}",JSON.toJSONString(BeanCloneUtils.deepClone(users,User.class,UserVo.class),true));
             return ResultVo.success(HttpStatus.STATUS_OK,BeanCloneUtils.deepClone(users,User.class,UserVo.class));
         }
         return ResultVo.fail("没有查到用户信息");

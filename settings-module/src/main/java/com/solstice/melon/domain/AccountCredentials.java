@@ -1,5 +1,6 @@
 package com.solstice.melon.domain;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @Time 10:33
  * @Description 用户登录凭证实体对象
  */
+@TableName("user")
 public class AccountCredentials extends BaseDomain implements Serializable {
 
     private static final long serialVersionUID = -8904196835943433592L;
@@ -23,13 +25,9 @@ public class AccountCredentials extends BaseDomain implements Serializable {
     private String nickName;
     private String password;
     private String salt;
-    private Byte sex;
     private String phone;
     private String email;
     private Byte locked;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date birthday;
 
     public String getUserName() {
         return userName;
@@ -53,14 +51,6 @@ public class AccountCredentials extends BaseDomain implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
     }
 
     public String getPhone() {
@@ -93,14 +83,6 @@ public class AccountCredentials extends BaseDomain implements Serializable {
 
     public void setLocked(Byte locked) {
         this.locked = locked;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     /**

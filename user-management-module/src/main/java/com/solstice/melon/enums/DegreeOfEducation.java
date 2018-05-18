@@ -1,5 +1,10 @@
 package com.solstice.melon.enums;
 
+import com.google.common.collect.Maps;
+import com.summer.base.utils.ObjectUtils;
+
+import java.util.Map;
+
 /**
  * Created by Intellij IDEA
  *
@@ -9,7 +14,7 @@ package com.solstice.melon.enums;
  * @Time 10:09
  * @Description 文化程度枚举
  */
-public enum DegreeOfEducation {
+public enum DegreeOfEducation implements BaseEnum {
 
     NON(0,"文盲","illiteracy"),
     PRIMARY_SCHOOL(1,"小学","primary school"),
@@ -26,6 +31,14 @@ public enum DegreeOfEducation {
     private String desc;
     private String eDesc;
 
+    private static Map<Integer,DegreeOfEducation> valueMap = Maps.newHashMap();
+
+    static {
+        for (DegreeOfEducation degreeOfEducation : values()) {
+            valueMap.put(degreeOfEducation.code,degreeOfEducation);
+        }
+    }
+
     DegreeOfEducation(int code,String desc,String eDesc) {
         this.code = code;
         this.desc = desc;
@@ -33,34 +46,29 @@ public enum DegreeOfEducation {
     }
 
     public static DegreeOfEducation indexOf(int code) {
-        DegreeOfEducation[] degreeOfEducations = values();
-        if (code < 0 || code > degreeOfEducations.length) {
-            return null;
+        DegreeOfEducation degreeOfEducation = valueMap.get(code);
+        if(ObjectUtils.isNull(degreeOfEducation)) {
+            throw new IllegalArgumentException("没有对应的文化程度枚举类型" + code);
         }
-        return degreeOfEducations[code];
-    }
-    
-    public int getCode() {
-        return code;
+        return degreeOfEducation;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    @Override
+    public int getValue() {
+        return this.code;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public String geteDesc() {
         return eDesc;
     }
 
-    public void seteDesc(String eDesc) {
-        this.eDesc = eDesc;
+    @Override
+    public String toString() {
+        return this.desc + "--" + this.eDesc;
     }
+
 }
