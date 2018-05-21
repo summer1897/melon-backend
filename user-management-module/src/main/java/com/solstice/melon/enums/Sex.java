@@ -1,9 +1,9 @@
 package com.solstice.melon.enums;
 
-import com.google.common.collect.Maps;
-import com.summer.base.utils.ObjectUtils;
 
-import java.util.Map;
+import com.baomidou.mybatisplus.enums.IEnum;
+
+import java.io.Serializable;
 
 /**
  * Created by Intellij IDEA
@@ -14,61 +14,38 @@ import java.util.Map;
  * @Time 10:03
  * @Description 性别枚举
  */
-public enum Sex implements BaseEnum {
+public enum Sex implements IEnum {
 
     MALE(0,"男","male"),FEMALE(1,"女","female");
 
     /**
      * 性别二进制表示,0表示男，1表示女
      */
-    private int code;
+    int value;
     /**
      * 性别中文表示
      */
-    private String sex;
+    String description;
     /**
      * 性别英文表示
      */
-    private String eSex;
+    String eDescription;
 
-    private static Map<Integer,Sex> valueMap = Maps.newHashMap();
 
-    static {
-        for (Sex sex : values()) {
-            valueMap.put(sex.code,sex);
-        }
-    }
-
-    Sex(int code,String sex,String eSex) {
-        this.code = code;
-        this.sex = sex;
-        this.eSex = eSex;
-    }
-
-    public static Sex indexOf(int code) {
-        Sex sex = valueMap.get(code);
-        if(ObjectUtils.isNull(sex)) {
-            throw new IllegalArgumentException("没有对应的性别枚举类型" + code);
-        }
-        return sex;
+    Sex(int value,String description,String eDescription) {
+        this.value = value;
+        this.description = description;
+        this.eDescription = eDescription;
     }
 
     @Override
-    public int getValue() {
-        return this.code;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public String geteSex() {
-        return eSex;
+    public Serializable getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return this.sex + "--" + this.eSex;
+        return this.description + "--" + this.eDescription;
     }
 
 }

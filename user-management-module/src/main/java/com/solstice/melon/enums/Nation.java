@@ -1,9 +1,8 @@
 package com.solstice.melon.enums;
 
-import com.google.common.collect.Maps;
-import com.summer.base.utils.ObjectUtils;
+import com.baomidou.mybatisplus.enums.IEnum;
 
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * Created by Intellij IDEA
@@ -14,7 +13,7 @@ import java.util.Map;
  * @Time 14:18
  * @Description 56个民族枚举
  */
-public enum Nation implements BaseEnum {
+public enum Nation implements IEnum {
 
     HAN_NATIONNALITY(0,"汉族","Han Nationality"),
     ZHUANG_NATIONNALITY(1,"壮族","Zhuang Nationality"),
@@ -73,42 +72,19 @@ public enum Nation implements BaseEnum {
     LBOBA_NATIONNALITY(54,"珞巴族","Lhoba Nationality"),
     BROWN_NATIONNALITY(55,"布朗族","Brown Nationality");
 
-    private int code;
-    private String description;
-    private String eDescription;
-    private static Map<Integer,Nation> valueMap = Maps.newHashMap();
+    int value;
+    String description;
+    String eDescription;
 
-    static {
-        for (Nation nation : values()) {
-            valueMap.put(nation.code,nation);
-        }
-    }
-
-    Nation(int code, String description, String eDescription) {
-        this.code = code;
+    Nation(int value, String description, String eDescription) {
+        this.value = value;
         this.description = description;
         this.eDescription = eDescription;
     }
 
-    public static Nation indexOf(int code) {
-        Nation nation = valueMap.get(code);
-        if(ObjectUtils.isNull(nation)) {
-            throw new IllegalArgumentException("没有对应的民族枚举类型" + code);
-        }
-        return nation;
-    }
-
     @Override
-    public int getValue() {
-        return this.code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String geteDescription() {
-        return eDescription;
+    public Serializable getValue() {
+        return value;
     }
 
     @Override

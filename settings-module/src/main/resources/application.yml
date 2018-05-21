@@ -23,15 +23,14 @@ spring:
 #  devtools:
 #    restart:
 #      enabled: true
-
   datasource:
     name: repositpry
     url: jdbc:mysql://127.0.0.1:3306/melon?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: summer
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    filters: stat
+    driverClassName: com.mysql.jdbc.Driver
+    filters: stat,wall,log4j
     maxActive: 20
     initialSize: 1
     maxWait: 60000
@@ -44,6 +43,7 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   application:
     name: melon-api
 
@@ -66,12 +66,13 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   type-aliases-package: com.solstice.melon.domain
-#  type-handlers-package: com.solstice.melon.typeHandlers
+  typeEnumsPackage: com.solstice.melon.enums
   global-config:
       #刷新mapper 调试神器
       refresh-mapper: true
       #驼峰下划线转换
       db-column-underline: true
+#  type-handlers-package: com.solstice.melon.typeHandlers
 
 pagehelper:
   helper-dialect: mysql

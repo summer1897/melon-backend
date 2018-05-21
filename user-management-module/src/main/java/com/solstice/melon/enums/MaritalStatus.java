@@ -1,9 +1,9 @@
 package com.solstice.melon.enums;
 
-import com.google.common.collect.Maps;
-import com.summer.base.utils.ObjectUtils;
 
-import java.util.Map;
+import com.baomidou.mybatisplus.enums.IEnum;
+
+import java.io.Serializable;
 
 /**
  * Created by Intellij IDEA
@@ -14,46 +14,23 @@ import java.util.Map;
  * @Time 17:15
  * @Description 婚姻状况枚举
  */
-public enum MaritalStatus implements BaseEnum {
+public enum MaritalStatus implements IEnum {
 
     UNMARRIED(0, "未婚", "unmarried"), MARRIED(1, "已婚", "married");
 
-    private int code;
-    private String description;
-    private String eDescription;
-    private static Map<Integer, MaritalStatus> valueMap = Maps.newHashMap();
+    int value;
+    String description;
+    String eDescription;
 
-    static {
-        for (MaritalStatus maritalStatus : values()) {
-            valueMap.put(maritalStatus.code, maritalStatus);
-        }
-    }
-
-    MaritalStatus(int code, String description, String eDescription) {
-        this.code = code;
+    MaritalStatus(int value, String description, String eDescription) {
+        this.value = value;
         this.description = description;
         this.eDescription = eDescription;
     }
 
-    public static MaritalStatus indexOf(int code) {
-        MaritalStatus maritalStatus = valueMap.get(code);
-        if(ObjectUtils.isNull(maritalStatus)) {
-            throw new IllegalArgumentException("没有对应的婚姻状态枚举类型" + code);
-        }
-        return maritalStatus;
-    }
-
     @Override
-    public int getValue() {
-        return this.code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String geteDescription() {
-        return eDescription;
+    public Serializable getValue() {
+        return value;
     }
 
     @Override

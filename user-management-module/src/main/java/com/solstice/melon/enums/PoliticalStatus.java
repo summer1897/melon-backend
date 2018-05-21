@@ -1,11 +1,8 @@
 package com.solstice.melon.enums;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.summer.base.utils.ObjectUtils;
+import com.baomidou.mybatisplus.enums.IEnum;
 
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * Created by Intellij IDEA
@@ -16,7 +13,7 @@ import java.util.Map;
  * @Time 17:26
  * @Description 政治面貌枚举
  */
-public enum PoliticalStatus implements BaseEnum {
+public enum PoliticalStatus implements IEnum {
 
     CHINESE_COMMUNIST_PARTY_MEMBER(1,"中共党员","Chinese Communist Party Member"),
     CHINESE_PROBATIONARY_COMMUNIST_PARTY_MEMBER(2,"中共预备党员","Chinese Probationary Communist Party Member"),
@@ -33,43 +30,19 @@ public enum PoliticalStatus implements BaseEnum {
     MASSES(13,"13群众","Masses");
 
 
-    private int code;
-    private String description;
-    private String eDescription;
+    int value;
+    String description;
+    String eDescription;
 
-    private static Map<Integer,PoliticalStatus> valueMap = Maps.newHashMap();
-
-    static {
-        for (PoliticalStatus politicalStatus : values()) {
-            valueMap.put(politicalStatus.code,politicalStatus);
-        }
-    }
-
-    PoliticalStatus(int code,String description,String eDescription) {
-        this.code = code;
+    PoliticalStatus(int value,String description,String eDescription) {
+        this.value = value;
         this.description = description;
         this.eDescription = eDescription;
     }
 
-    public static PoliticalStatus indexOf(int code) {
-        PoliticalStatus politicalStatus = valueMap.get(code);
-        if(ObjectUtils.isNull(politicalStatus)) {
-            throw new IllegalArgumentException("没有找着对应的政治面貌枚举类型" + code);
-        }
-        return politicalStatus;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String geteDescription() {
-        return eDescription;
-    }
-
     @Override
-    public int getValue() {
-        return this.code;
+    public Serializable getValue() {
+        return value;
     }
 
     @Override

@@ -70,10 +70,10 @@ public class SpringBootConfig extends WebMvcConfigurerAdapter {
         argumentResolvers.add(new CurrentUserHandlerMethodArgumentResolver());
     }
 
-    @Override
+    /*@Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverterFactory(new UniversalEnumConverterFactory());
-    }
+    }*/
 
     /**
      * 该类用于解决Java实体对象Long类型Id以json形式返回给前端，

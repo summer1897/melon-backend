@@ -32,7 +32,7 @@ public class FamilyRelationship extends BaseDomain implements Serializable {
      * 文化程度
      */
     private DegreeOfEducation degreeOfEducation;
-    private String jpb;
+    private String job;
     private String phone;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -70,12 +70,12 @@ public class FamilyRelationship extends BaseDomain implements Serializable {
         this.degreeOfEducation = degreeOfEducation;
     }
 
-    public String getJpb() {
-        return jpb;
+    public String getJob() {
+        return job;
     }
 
-    public void setJpb(String jpb) {
-        this.jpb = jpb;
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getPhone() {
