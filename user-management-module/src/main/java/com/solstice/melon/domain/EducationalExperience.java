@@ -33,7 +33,7 @@ public class EducationalExperience extends BaseDomain implements Serializable {
     /**
      * 专业学制
      */
-    private Integer yearOfMajor;
+    private Double yearOfMajor;
     /**
      * 专业研究方向介绍
      */
@@ -79,11 +79,11 @@ public class EducationalExperience extends BaseDomain implements Serializable {
         this.major = major;
     }
 
-    public Integer getYearOfMajor() {
+    public Double getYearOfMajor() {
         return yearOfMajor;
     }
 
-    public void setYearOfMajor(Integer yearOfMajor) {
+    public void setYearOfMajor(Double yearOfMajor) {
         this.yearOfMajor = yearOfMajor;
     }
 

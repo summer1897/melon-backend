@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.solstice.melon.enums.BaseEnum;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
+import org.springframework.util.Assert;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -18,22 +19,32 @@ import java.util.WeakHashMap;
  * @Time 15:44
  * @Description 通用枚举类型到字符串类型转换工具类
  */
-public class UniversalEnumConverterFactory implements ConverterFactory<String,IEnum> {
+public class UniversalEnumConverterFactory implements ConverterFactory<BaseEnum,String> {
 
     private static final Map<Class, Converter> converterMap = new WeakHashMap<>();
 
     @Override
-    public <T extends IEnum> Converter<String, T> getConverter(Class<T> targetType) {
+    public <T extends String> Converter<BaseEnum, T> getConverter(Class<T> aClass) {
+        return null;
+    }
+
+    /*@Override
+    public <T extends BaseEnum> Converter<BaseEnum, T> getConverter(Class<T> targetType) {
         Converter result = converterMap.get(targetType);
         if(result == null) {
-            result = new IntegerStrToEnum<T>(targetType);
+            result = new IntegerStrToEnum<T>();
             converterMap.put(targetType, result);
         }
         return result;
-    }
+    }*/
 
-    class IntegerStrToEnum<T extends IEnum> implements Converter<String, T> {
-        private final Class<T> enumType;
+   /* @Override
+    public Converter<BaseEnum, String> getConverter(Class<String> aClass) {
+        return null;
+    }*/
+
+    class IntegerStrToEnum<T extends BaseEnum> implements Converter<T, String> {
+       /* private final Class<T> enumType;
         private Map<String, T> enumMap = Maps.newHashMap();
 
         public IntegerStrToEnum(Class<T> enumType) {
@@ -42,16 +53,12 @@ public class UniversalEnumConverterFactory implements ConverterFactory<String,IE
             for(T e : enums) {
                 enumMap.put(e.getValue() + "", e);
             }
-        }
-
+        }*/
 
         @Override
-        public T convert(String source) {
-            T result = enumMap.get(source);
-            if(result == null) {
-                throw new IllegalArgumentException("No element matches " + source);
-            }
-            return result;
+        public String convert(T t) {
+            Assert.isNull(t,"No element matches " + t);
+            return t.getDescription();
         }
     }
 }

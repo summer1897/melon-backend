@@ -41,7 +41,7 @@ public class WorkExperience extends BaseDomain implements Serializable {
     /**
      * 证明人
      */
-    private String retercen;
+    private String reterence;
     /**
      * 工作起始时间
      */
@@ -95,12 +95,12 @@ public class WorkExperience extends BaseDomain implements Serializable {
         this.description = description;
     }
 
-    public String getRetercen() {
-        return retercen;
+    public String getReterence() {
+        return reterence;
     }
 
-    public void setRetercen(String retercen) {
-        this.retercen = retercen;
+    public void setReterence(String reterence) {
+        this.reterence = reterence;
     }
 
     public Date getStartTime() {

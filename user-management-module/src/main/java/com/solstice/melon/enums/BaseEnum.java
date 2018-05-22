@@ -1,6 +1,7 @@
 package com.solstice.melon.enums;
 
 
+import com.baomidou.mybatisplus.enums.IEnum;
 import com.summer.base.utils.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -15,8 +16,7 @@ import java.lang.reflect.Field;
  * @Time 15:20
  * @Description
  */
-public interface BaseEnum {
-    String DEFAULT_VALUE = "value";
+public interface BaseEnum extends IEnum{
     /**
      * 枚举中文描述
      */
@@ -25,19 +25,6 @@ public interface BaseEnum {
      * 枚举英文描述
      */
     String DEFAULT_E_DESCRIPTION = "eDescription";
-
-    default Integer getValue() {
-        Field field = ReflectionUtils.findField(this.getClass(), DEFAULT_VALUE);
-        if (ObjectUtils.isNull(field)) {
-            return null;
-        }
-        try {
-            field.setAccessible(true);
-            return Integer.parseInt(field.get(this).toString());
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     default String getDescription() {
         return getString(DEFAULT_DESCRIPTION);

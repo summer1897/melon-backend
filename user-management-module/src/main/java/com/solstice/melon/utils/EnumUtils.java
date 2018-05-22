@@ -14,7 +14,7 @@ import com.summer.base.utils.ObjectUtils;
  */
 public class EnumUtils {
 
-    public static <E extends Enum<?> & BaseEnum> E valueOf(Class<E> classEnum,int value) {
+    /*public static <E extends Enum<?> & BaseEnum> E valueOf(Class<E> classEnum,int value) {
         if (ObjectUtils.isNotNull(classEnum)) {
             E[] enumConstants = classEnum.getEnumConstants();
             for (E e : enumConstants) {
@@ -24,6 +24,6 @@ public class EnumUtils {
             }
         }
         return null;
-    }
+    }*/
 
 }

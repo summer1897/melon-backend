@@ -43,49 +43,49 @@ public class ValueEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseType
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, BaseEnum baseEnum, JdbcType jdbcType) throws SQLException {
-        log.info("ValueEnumTypeHandler.setNonNullParameter()");
-        ps.setInt(i,baseEnum.getValue());
+        /*log.info("ValueEnumTypeHandler.setNonNullParameter()");
+        ps.setInt(i,baseEnum.getValue());*/
     }
 
     @Override
     public BaseEnum getNullableResult(ResultSet rs, String s) throws SQLException {
         log.info("ValueEnumTypeHandler.getNullableResult()");
-        if (!rs.wasNull()) {
+        /*if (!rs.wasNull()) {
             int i = rs.getInt(s);
             try {
                 return EnumUtils.valueOf(type,i);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.", e);
             }
-        }
+        }*/
         return null;
     }
 
     @Override
     public BaseEnum getNullableResult(ResultSet rs, int index) throws SQLException {
         log.info("ValueEnumTypeHandler.getNullableResult()");
-        if (!rs.wasNull()) {
+        /*if (!rs.wasNull()) {
             int i = rs.getInt(index);
             try {
                 return EnumUtils.valueOf(type,i);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.", e);
             }
-        }
+        }*/
         return null;
     }
 
     @Override
     public BaseEnum getNullableResult(CallableStatement cs, int index) throws SQLException {
         log.info("ValueEnumTypeHandler.getNullableResult()");
-        if (!cs.wasNull()) {
+        /*if (!cs.wasNull()) {
             int i = cs.getInt(index);
             try {
                 return EnumUtils.valueOf(type,i);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.", e);
             }
-        }
+        }*/
         return null;
     }
 }

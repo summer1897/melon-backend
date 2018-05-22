@@ -34,9 +34,9 @@ public class ResumeController {
 
     @PostMapping("/add.json")
     public ResultVo add(@RequestBody Resume resume){
-        log.info("Controller layer: add({})", JSON.toJSONString(resume,true));
+        log.info("Controller layer: ResumeController.add({})", JSON.toJSONString(resume,true));
 
-        Assert.isNull(resume,"上传简历为空");
+        Assert.notNull(resume,"上传简历为空");
         boolean flag = resumeService.insert(resume);
         if (flag) {
             return ResultVo.success(HttpStatus.STATUS_OK);
@@ -46,9 +46,9 @@ public class ResumeController {
 
     @GetMapping("/lists.json")
     public ResultVo lists(@CurrentUser Long userId) {
-        log.info("Controller layer: lists({})",userId);
+        log.info("Controller layer: ResumeController.lists({})",userId);
 
-        Assert.isNull(userId,"用户不存在 userId is null");
+        Assert.notNull(userId,"用户不存在 userId is null");
         List<Resume> resumes = resumeService.queryResume(userId);
         if (ObjectUtils.isNotEmpty(resumes)) {
             return ResultVo.success(HttpStatus.STATUS_OK,resumes);
@@ -60,7 +60,7 @@ public class ResumeController {
     public ResultVo delete(@PathVariable Long id) {
         log.info("Controller layer: delete({})",id);
 
-        Assert.isNull(id,"待删除简历Id不能为空!");
+        Assert.notNull(id,"待删除简历Id不能为空!");
         boolean success = resumeService.deleteById(id);
         if (success) {
             return ResultVo.success(HttpStatus.STATUS_OK);

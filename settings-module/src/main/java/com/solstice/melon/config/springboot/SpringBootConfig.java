@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.solstice.melon.resolver.CurrentUserHandlerMethodArgumentResolver;
+import com.solstice.melon.utils.EnumToStringConverter;
 import com.solstice.melon.utils.UniversalEnumConverterFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,10 +71,11 @@ public class SpringBootConfig extends WebMvcConfigurerAdapter {
         argumentResolvers.add(new CurrentUserHandlerMethodArgumentResolver());
     }
 
-    /*@Override
+    @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverterFactory(new UniversalEnumConverterFactory());
-    }*/
+        registry.addConverter(new EnumToStringConverter());
+//        registry.addConverterFactory(new UniversalEnumConverterFactory());
+    }
 
     /**
      * 该类用于解决Java实体对象Long类型Id以json形式返回给前端，
