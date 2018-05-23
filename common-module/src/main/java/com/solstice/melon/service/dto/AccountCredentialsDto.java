@@ -1,6 +1,7 @@
-package com.solstice.melon.vo;
+package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.solstice.melon.domain.BaseDomain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -9,28 +10,15 @@ import java.util.Date;
 /**
  * Created by Intellij IDEA
  *
- * @Projcet melon
- * @Author solstice
- * @Date 2018/05/11
- * @Time 09:59
+ * @Projcet civi-air-defence
+ * @Author summer
+ * @Date 2018/04/17
+ * @Time 11:14
  * @Description
  */
-public class Principal implements Serializable {
-    private static final long serialVersionUID = -6202828955146226103L;
+public class AccountCredentialsDto implements Serializable {
 
-    /**
-     * 用户状态，为激活（比如，邮箱注册，没有激活）
-     */
-    public static final byte STATUS_NO_ACTIVATION = 0;
-    /**
-     *  用户状态，正常
-     */
-    public static final byte STATUS_NO_NORMAL = 1;
-    /**
-     * 用户状态，已锁定
-     */
-    public static final byte STATUS_NO_LOCKED = 0;
-
+    private static final long serialVersionUID = -2153790752530415229L;
 
     private Long id;
 

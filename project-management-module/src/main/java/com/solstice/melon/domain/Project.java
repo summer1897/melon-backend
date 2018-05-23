@@ -1,7 +1,9 @@
 package com.solstice.melon.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.solstice.melon.enums.ProgressEnum;
 import com.solstice.melon.enums.ProgressSituationEnum;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,12 +20,25 @@ import java.util.Date;
 public class Project extends BaseDomain implements Serializable {
     private static final long serialVersionUID = 8169377655609273983L;
 
+    /**
+     * 项目主要负责部门Id
+     */
     private Long departmentId;
+    /**
+     * 项目编号
+     */
     private String number;
+    /**
+     * 项目甲方公司名称
+     */
     private String employeName;
     private String name;
     private Long typeId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
     private Double totalFunds;
     private Double contractAmount;

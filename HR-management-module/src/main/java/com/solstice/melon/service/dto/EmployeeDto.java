@@ -1,4 +1,4 @@
-package com.solstice.melon.vo;
+package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,32 +11,14 @@ import java.util.Date;
  *
  * @Projcet melon
  * @Author solstice
- * @Date 2018/05/11
- * @Time 09:59
+ * @Date 2018/5/23
+ * @Time 15:51
  * @Description
  */
-public class Principal implements Serializable {
-    private static final long serialVersionUID = -6202828955146226103L;
-
-    /**
-     * 用户状态，为激活（比如，邮箱注册，没有激活）
-     */
-    public static final byte STATUS_NO_ACTIVATION = 0;
-    /**
-     *  用户状态，正常
-     */
-    public static final byte STATUS_NO_NORMAL = 1;
-    /**
-     * 用户状态，已锁定
-     */
-    public static final byte STATUS_NO_LOCKED = 0;
-
+public class EmployeeDto implements Serializable {
+    private static final long serialVersionUID = -952331434268381511L;
 
     private Long id;
-
-    /**
-     * 用户账号
-     */
     private String userName;
     /**
      * 用户昵称或姓名
@@ -59,10 +41,6 @@ public class Principal implements Serializable {
      */
     private String email;
 
-    /**
-     * 用户状态，0：创建未认证（比如，邮箱注册，没有激活），1：正常状态，2：用户被锁定
-     */
-    private Byte locked;
     /**
      * 头像存放路径
      */
@@ -140,14 +118,6 @@ public class Principal implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Byte getLocked() {
-        return locked;
-    }
-
-    public void setLocked(Byte locked) {
-        this.locked = locked;
     }
 
     public String getPhotoUrl() {

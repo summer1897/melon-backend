@@ -189,15 +189,15 @@ CREATE TABLE IF NOT EXISTS project_group (
   FOREIGN KEY (department_id) REFERENCES department (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '部门项目组信息表';
 
-DROP TABLE IF EXISTS user_group;
-CREATE TABLE IF NOT EXISTS user_group (
-  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
-  user_id BIGINT NOT NULL COMMENT '用户Id',
-  group_id BIGINT NOT NULL COMMENT '项目组Id',
-  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
-  create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
-  PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户、项目组管理表';
+# DROP TABLE IF EXISTS user_group;
+# CREATE TABLE IF NOT EXISTS user_group (
+#   id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+#   user_id BIGINT NOT NULL COMMENT '用户Id',
+#   group_id BIGINT NOT NULL COMMENT '项目组Id',
+#   modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
+#   create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
+#   PRIMARY KEY (id)
+# ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户、项目组管理表';
 
 DROP TABLE IF EXISTS project;
 CREATE TABLE IF NOT EXISTS project (
@@ -245,6 +245,26 @@ CREATE TABLE IF NOT EXISTS project_member (
   create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
   PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目成员关联表';
+
+DROP TABLE IF EXISTS project_company;
+CREATE TABLE IF NOT EXISTS project_company (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  project_id BIGINT NOT NULL COMMENT '项目Id',
+  company_id BIGINT NOT NULL COMMENT '公司Id',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目与合作公司关联关系表';
+
+DROP TABLE IF EXISTS project_department;
+CREATE TABLE IF NOT EXISTS project_department (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  project_id BIGINT NOT NULL COMMENT '项目Id',
+  department_id BIGINT NOT NULL COMMENT '部门Id',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目与合作部门关联关系表';
 
 DROP TABLE IF EXISTS task;
 CREATE TABLE IF NOT EXISTS task (

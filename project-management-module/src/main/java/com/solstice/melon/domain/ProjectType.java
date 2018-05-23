@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Author solstice
  * @Date 2018/5/15
  * @Time 17:06
- * @Description
+ * @Description 项目类型实体类
  */
 public class ProjectType extends BaseDomain implements Serializable {
 

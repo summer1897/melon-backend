@@ -1,42 +1,25 @@
-package com.solstice.melon.vo;
+package com.solstice.melon.controller.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Intellij IDEA
  *
  * @Projcet melon
  * @Author solstice
- * @Date 2018/05/11
- * @Time 09:59
+ * @Date 2018/5/23
+ * @Time 17:06
  * @Description
  */
-public class Principal implements Serializable {
-    private static final long serialVersionUID = -6202828955146226103L;
-
-    /**
-     * 用户状态，为激活（比如，邮箱注册，没有激活）
-     */
-    public static final byte STATUS_NO_ACTIVATION = 0;
-    /**
-     *  用户状态，正常
-     */
-    public static final byte STATUS_NO_NORMAL = 1;
-    /**
-     * 用户状态，已锁定
-     */
-    public static final byte STATUS_NO_LOCKED = 0;
-
+public class EmployeeVo implements Serializable {
+    private static final long serialVersionUID = 2168168082523211180L;
 
     private Long id;
-
-    /**
-     * 用户账号
-     */
     private String userName;
     /**
      * 用户昵称或姓名
@@ -60,10 +43,6 @@ public class Principal implements Serializable {
     private String email;
 
     /**
-     * 用户状态，0：创建未认证（比如，邮箱注册，没有激活），1：正常状态，2：用户被锁定
-     */
-    private Byte locked;
-    /**
      * 头像存放路径
      */
     private String photoUrl;
@@ -85,6 +64,8 @@ public class Principal implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timeOfEntry;
+
+    private List<ResumeVo> resumeVos;
 
     public Long getId() {
         return id;
@@ -142,14 +123,6 @@ public class Principal implements Serializable {
         this.email = email;
     }
 
-    public Byte getLocked() {
-        return locked;
-    }
-
-    public void setLocked(Byte locked) {
-        this.locked = locked;
-    }
-
     public String getPhotoUrl() {
         return photoUrl;
     }
@@ -188,5 +161,13 @@ public class Principal implements Serializable {
 
     public void setTimeOfEntry(Date timeOfEntry) {
         this.timeOfEntry = timeOfEntry;
+    }
+
+    public List<ResumeVo> getResumeVos() {
+        return resumeVos;
+    }
+
+    public void setResumeVos(List<ResumeVo> resumeVos) {
+        this.resumeVos = resumeVos;
     }
 }

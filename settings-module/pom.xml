@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>com.solstice.melon</groupId>
-            <artifactId>user-management-module</artifactId>
+            <artifactId>HR-management-module</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

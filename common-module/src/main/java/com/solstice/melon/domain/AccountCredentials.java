@@ -1,5 +1,6 @@
-package com.solstice.melon.vo;
+package com.solstice.melon.domain;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,27 +13,13 @@ import java.util.Date;
  * @Projcet melon
  * @Author solstice
  * @Date 2018/05/11
- * @Time 09:59
- * @Description
+ * @Time 10:33
+ * @Description 用户登录凭证实体对象
  */
-public class Principal implements Serializable {
-    private static final long serialVersionUID = -6202828955146226103L;
+@TableName("user")
+public class AccountCredentials extends BaseDomain implements Serializable {
 
-    /**
-     * 用户状态，为激活（比如，邮箱注册，没有激活）
-     */
-    public static final byte STATUS_NO_ACTIVATION = 0;
-    /**
-     *  用户状态，正常
-     */
-    public static final byte STATUS_NO_NORMAL = 1;
-    /**
-     * 用户状态，已锁定
-     */
-    public static final byte STATUS_NO_LOCKED = 0;
-
-
-    private Long id;
+    private static final long serialVersionUID = -8904196835943433592L;
 
     /**
      * 用户账号
@@ -42,6 +29,14 @@ public class Principal implements Serializable {
      * 用户昵称或姓名
      */
     private String nickName;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 加密密码的盐
+     */
+    private String salt;
     /**
      * 职位
      */
@@ -86,14 +81,6 @@ public class Principal implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timeOfEntry;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -108,6 +95,22 @@ public class Principal implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getPost() {
@@ -188,5 +191,14 @@ public class Principal implements Serializable {
 
     public void setTimeOfEntry(Date timeOfEntry) {
         this.timeOfEntry = timeOfEntry;
+    }
+
+    /**
+     * 密码盐（用于对明文密码进行加密）
+     *
+     * @return
+     */
+    public String getCredentialSalt() {
+        return this.userName + this.salt;
     }
 }
