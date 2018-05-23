@@ -32,7 +32,7 @@ public class CurrentUserHandlerMethodArgumentResolver implements HandlerMethodAr
          * @CurrentUser注释支持的参数类型,仅支持 {@see Principal}或{@link Integer}
          */
         if (clazz.isAssignableFrom(Principal.class) || clazz.isAssignableFrom(Long.class)) {
-            log.error("if has CurrentUser annotation: {}", methodParameter.hasParameterAnnotation(CurrentUser.class));
+            log.info("if has CurrentUser annotation: {}", methodParameter.hasParameterAnnotation(CurrentUser.class));
 //            Annotation[] annotations = methodParameter.getParameterAnnotations();
             return methodParameter.hasParameterAnnotation(CurrentUser.class);
             /*log.error("annotations: {}",annotations);
@@ -52,13 +52,13 @@ public class CurrentUserHandlerMethodArgumentResolver implements HandlerMethodAr
                                   ModelAndViewContainer modelAndViewContainer,
                                   NativeWebRequest nativeWebRequest,
                                   WebDataBinderFactory webDataBinderFactory){
-        log.info("为com.dlsjy.dxzx.vo.Principal实体对象注入当前登录用户信息");
+        log.info("为com.solstice.melon.vo.Principal实体对象注入当前登录用户信息");
         Object result = null;
 
         try {
             /**
              * 当为{@link Principal}的时候，表示将当前登录用户信息注入参数中，
-             * 当为{@link Integer}，表示将当前用户id注入参数中。
+             * 当为{@link Long}，表示将当前用户id注入参数中。
              */
             if (SecurityUtil.isAuthenticated() || SecurityUtil.isRemembered()) {
                 Class<?> clazz = parameter.getParameterType();
@@ -72,7 +72,7 @@ public class CurrentUserHandlerMethodArgumentResolver implements HandlerMethodAr
                     result = principal;
                 }
 
-                if (clazz.isAssignableFrom(Integer.class)) {
+                if (clazz.isAssignableFrom(Long.class)) {
                     result = ObjectUtils.isNotNull(principal) ? principal.getId() : null;
                 }
             }

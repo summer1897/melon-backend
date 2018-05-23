@@ -1,18 +1,19 @@
 package com.solstice.melon.controller.json;
 
 import com.alibaba.fastjson.JSON;
-import com.boom.controller.vo.RolePermissionVo;
-import com.boom.domain.Role;
-import com.boom.enums.HttpStatus;
-import com.boom.manager.IRoleManager;
-import com.boom.service.IRoleService;
-import com.boom.service.dto.SimpleRoleDto;
-import com.boom.utils.MapBuilder;
-import com.boom.utils.MapUtils;
-import com.boom.vo.ResultVo;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.base.enums.HttpStatus;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.solstice.melon.controller.vo.RolePermissionVo;
+import com.solstice.melon.domain.Role;
+import com.solstice.melon.manager.IRoleManager;
+import com.solstice.melon.service.IRoleService;
+import com.solstice.melon.service.dto.SimpleRoleDto;
+import com.solstice.melon.utils.MapBuilder;
+import com.solstice.melon.utils.MapUtils;
 import com.summer.base.utils.ObjectUtils;
+import com.summer.base.utils.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,12 +84,11 @@ public class RoleController {
                                       @PathVariable("pageSize") Integer pageSize) {
         log.info("Controller layer:分页查询角色对象,pageNum={},pageSize={}===>RoleController.listsByPagination()",pageNum,pageSize);
 
-        List<Role> roles = roleService.queryAllByPagination(pageNum, pageSize);
-        if (ObjectUtils.isNotEmpty(roles)) {
-            PageInfo<Role> pageInfo = new PageInfo<>(roles);
+        Page<Role> roles = roleService.queryAllByPagination(pageNum, pageSize);
+        if (ObjectUtils.isNotEmpty(roles.getRecords())) {
             MapBuilder<Object, Object> data = MapUtils.builder()
-                                                      .putVal("roleLists", pageInfo.getList())
-                                                      .putVal("total", pageInfo.getTotal());
+                                                      .putVal("roleLists", roles.getRecords())
+                                                      .putVal("total", roles.getTotal());
             return ResultVo.success(HttpStatus.STATUS_OK,data);
         }
         return ResultVo.fail("没有查询到角色信息");

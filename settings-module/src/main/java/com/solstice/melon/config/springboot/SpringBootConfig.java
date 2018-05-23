@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.solstice.melon.resolver.CurrentUserHandlerMethodArgumentResolver;
+import com.solstice.melon.utils.EnumToStringConverter;
+import com.solstice.melon.utils.UniversalEnumConverterFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -66,6 +69,12 @@ public class SpringBootConfig extends WebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
         argumentResolvers.add(new CurrentUserHandlerMethodArgumentResolver());
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+//        registry.addConverter(new EnumToStringConverter());
+//        registry.addConverterFactory(new UniversalEnumConverterFactory());
     }
 
     /**

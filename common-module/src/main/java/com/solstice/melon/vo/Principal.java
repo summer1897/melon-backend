@@ -33,16 +33,58 @@ public class Principal implements Serializable {
 
 
     private Long id;
-    private String userName;
-    private String nickName;
-    private Byte sex;
-    private String phone;
-    private String email;
-    private Byte locked;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date birthday;
 
+    /**
+     * 用户账号
+     */
+    private String userName;
+    /**
+     * 用户昵称或姓名
+     */
+    private String nickName;
+    /**
+     * 职位
+     */
+    private String post;
+    /**
+     * 职称
+     */
+    private String title;
+    /**
+     * 手机号码
+     */
+    private String phone;
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 用户状态，0：创建未认证（比如，邮箱注册，没有激活），1：正常状态，2：用户被锁定
+     */
+    private Byte locked;
+    /**
+     * 头像存放路径
+     */
+    private String photoUrl;
+    /**
+     * 个人简介
+     */
+    private String selfIntroduction;
+    /**
+     * 户籍所在地
+     */
+    private String residenceAddress;
+    /**
+     * 当前所在地
+     */
+    private String currentAddress;
+    /**
+     * 参见工作时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date timeOfEntry;
 
     public Long getId() {
         return id;
@@ -68,12 +110,20 @@ public class Principal implements Serializable {
         this.nickName = nickName;
     }
 
-    public Byte getSex() {
-        return sex;
+    public String getPost() {
+        return post;
     }
 
-    public void setSex(Byte sex) {
-        this.sex = sex;
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPhone() {
@@ -100,11 +150,43 @@ public class Principal implements Serializable {
         this.locked = locked;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getSelfIntroduction() {
+        return selfIntroduction;
+    }
+
+    public void setSelfIntroduction(String selfIntroduction) {
+        this.selfIntroduction = selfIntroduction;
+    }
+
+    public String getResidenceAddress() {
+        return residenceAddress;
+    }
+
+    public void setResidenceAddress(String residenceAddress) {
+        this.residenceAddress = residenceAddress;
+    }
+
+    public String getCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(String currentAddress) {
+        this.currentAddress = currentAddress;
+    }
+
+    public Date getTimeOfEntry() {
+        return timeOfEntry;
+    }
+
+    public void setTimeOfEntry(Date timeOfEntry) {
+        this.timeOfEntry = timeOfEntry;
     }
 }

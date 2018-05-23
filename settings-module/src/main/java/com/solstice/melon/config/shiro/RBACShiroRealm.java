@@ -1,8 +1,8 @@
 package com.solstice.melon.config.shiro;
 
-import com.dlsjy.dxzx.domain.AccountCredentials;
-import com.dlsjy.dxzx.manager.IAccountCredentialsManager;
-import com.dlsjy.dxzx.service.IAccountCredentialsService;
+import com.solstice.melon.domain.AccountCredentials;
+import com.solstice.melon.manager.IUserManager;
+import com.solstice.melon.service.IAccountCredentialsService;
 import com.solstice.melon.vo.Principal;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.ObjectUtils;
@@ -31,7 +31,7 @@ public class RBACShiroRealm extends AuthorizingRealm {
     @Autowired
     private IAccountCredentialsService accountCredentialsService;
     @Autowired
-    private IAccountCredentialsManager accountCredentialsManager;
+    private IUserManager userManager;
 
     /*@Autowired
     private HashedCredentialsMatcher hashedCredentialsMatcher;*/
@@ -44,8 +44,8 @@ public class RBACShiroRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
-        List<String> roles = accountCredentialsManager.queryRoles(userId);
-        List<String> permissions = accountCredentialsManager.queryPermissions(userId);
+        List<String> roles = userManager.queryUserRolesStr(userId);
+        List<String> permissions = userManager.queryUserPermission(userId);
 
         if (ObjectUtils.isNotEmpty(roles)) {
             authorizationInfo.addRoles(roles);
