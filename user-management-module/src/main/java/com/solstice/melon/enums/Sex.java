@@ -2,6 +2,7 @@ package com.solstice.melon.enums;
 
 
 import com.baomidou.mybatisplus.enums.IEnum;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.io.Serializable;
 
@@ -14,7 +15,7 @@ import java.io.Serializable;
  * @Time 10:03
  * @Description 性别枚举
  */
-public enum Sex implements IEnum {
+public enum Sex implements BaseEnum {
 
     MALE(0,"男","male"),FEMALE(1,"女","female");
 

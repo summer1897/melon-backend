@@ -1,5 +1,7 @@
 package com.solstice.melon.enums;
 
+import java.io.Serializable;
+
 /**
  * Created by Intellij IDEA
  *
@@ -9,7 +11,7 @@ package com.solstice.melon.enums;
  * @Time 10:34
  * @Description 登录用户状态信息
  */
-public enum AccountSatus {
+public enum AccountSatus implements BaseEnum {
 
     UN_ACTIVATION_STATUS(0,"未激活"),
     NORMAL_STATUS(1,"正常"),
@@ -30,12 +32,13 @@ public enum AccountSatus {
         this.description = description;
     }
 
-    public int getStatus() {
+    @Override
+    public Serializable getValue() {
         return this.status;
     }
 
-    public String getDescription() {
-        return this.description;
+    public int getStatus() {
+        return this.status;
     }
 
 }

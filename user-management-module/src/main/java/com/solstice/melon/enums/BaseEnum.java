@@ -2,6 +2,7 @@ package com.solstice.melon.enums;
 
 
 import com.baomidou.mybatisplus.enums.IEnum;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.summer.base.utils.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -26,6 +27,7 @@ public interface BaseEnum extends IEnum{
      */
     String DEFAULT_E_DESCRIPTION = "eDescription";
 
+    @JsonValue
     default String getDescription() {
         return getString(DEFAULT_DESCRIPTION);
     }

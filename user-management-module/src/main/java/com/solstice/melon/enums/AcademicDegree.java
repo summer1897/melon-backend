@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Time 10:34
  * @Description 学位枚举
  */
-public enum AcademicDegree implements IEnum {
+public enum AcademicDegree implements BaseEnum {
 
     ILLITERACY(0,"文盲","illiteracy"),
     PRIMARY_SCHOOL(1,"小学","primary school"),

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Time 17:26
  * @Description 政治面貌枚举
  */
-public enum PoliticalStatus implements IEnum {
+public enum PoliticalStatus implements BaseEnum {
 
     CHINESE_COMMUNIST_PARTY_MEMBER(1,"中共党员","Chinese Communist Party Member"),
     CHINESE_PROBATIONARY_COMMUNIST_PARTY_MEMBER(2,"中共预备党员","Chinese Probationary Communist Party Member"),

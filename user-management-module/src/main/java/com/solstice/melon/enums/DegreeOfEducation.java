@@ -16,7 +16,7 @@ import java.util.Map;
  * @Time 10:09
  * @Description 文化程度枚举
  */
-public enum DegreeOfEducation implements IEnum,BaseEnum {
+public enum DegreeOfEducation implements BaseEnum {
 
     ILLITERACY(0,"文盲","illiteracy"),
     PRIMARY_SCHOOL(1,"小学","primary school"),

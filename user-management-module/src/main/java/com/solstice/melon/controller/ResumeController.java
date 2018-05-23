@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.base.enums.HttpStatus;
 import com.solstice.melon.annotations.CurrentUser;
 import com.solstice.melon.domain.Resume;
+import com.solstice.melon.manager.IResumeManager;
+import com.solstice.melon.manager.dto.ResumeDto;
 import com.solstice.melon.service.IResumeService;
 import com.summer.base.utils.ObjectUtils;
 import com.summer.base.utils.ResultVo;
@@ -31,6 +33,8 @@ public class ResumeController {
     private static final Logger log = LoggerFactory.getLogger(ResumeController.class);
     @Autowired
     private IResumeService resumeService;
+    @Autowired
+    private IResumeManager resumeManager;
 
     @PostMapping("/add.json")
     public ResultVo add(@RequestBody Resume resume){
@@ -49,9 +53,9 @@ public class ResumeController {
         log.info("Controller layer: ResumeController.lists({})",userId);
 
         Assert.notNull(userId,"用户不存在 userId is null");
-        List<Resume> resumes = resumeService.queryResume(userId);
-        if (ObjectUtils.isNotEmpty(resumes)) {
-            return ResultVo.success(HttpStatus.STATUS_OK,resumes);
+        List<ResumeDto> resumeDtos = resumeManager.queryByUserId(userId);
+        if (ObjectUtils.isNotEmpty(resumeDtos)) {
+            return ResultVo.success(HttpStatus.STATUS_OK,resumeDtos);
         }
         return ResultVo.fail();
     }

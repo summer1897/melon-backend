@@ -73,7 +73,7 @@ public class SpringBootConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new EnumToStringConverter());
+//        registry.addConverter(new EnumToStringConverter());
 //        registry.addConverterFactory(new UniversalEnumConverterFactory());
     }
 

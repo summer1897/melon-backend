@@ -1,12 +1,9 @@
 package com.solstice.melon.typehandlers;
 
 import com.solstice.melon.enums.*;
-import com.solstice.melon.utils.EnumUtils;
 import com.summer.base.utils.ObjectUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
-import org.apache.ibatis.type.MappedTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

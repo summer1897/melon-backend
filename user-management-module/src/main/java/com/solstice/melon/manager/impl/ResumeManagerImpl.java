@@ -1,5 +1,6 @@
 package com.solstice.melon.manager.impl;
 
+import com.baomidou.mybatisplus.mapper.Condition;
 import com.google.common.collect.Lists;
 import com.solstice.melon.domain.*;
 import com.solstice.melon.manager.IResumeManager;
@@ -56,6 +57,21 @@ public class ResumeManagerImpl implements IResumeManager {
         //填充简历信息
         this.composeResume(resumeDtos);
         return resumeDtos;
+    }
+
+    @Override
+    public boolean delete(Long resumeId) {
+        log.info("ResumeManagerImpl.delete({})",resumeId);
+
+        //先删除与简历相关的从属信息，最后再删除简历
+        educationalExperienceService.delete(Condition.create().eq("resume_id",resumeId));
+        schoolActivitiesService.delete(Condition.create().eq("resume_id",resumeId));
+        schoolRewardService.delete(Condition.create().eq("resume_id",resumeId));
+        workExperienceService.delete(Condition.create().eq("resume_id",resumeId));
+        internshipExperienceService.delete(Condition.create().eq("resume_id",resumeId));
+        resumeService.deleteById(resumeId);
+
+        return true;
     }
 
     private void composeResume(List<ResumeDto> resumeDtos) {

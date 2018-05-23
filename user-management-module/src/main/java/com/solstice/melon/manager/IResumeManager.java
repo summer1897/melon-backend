@@ -22,4 +22,11 @@ public interface IResumeManager {
      */
     List<ResumeDto> queryByUserId(Long userId);
 
+    /**
+     *
+     * @param resumeId
+     * @return {@link boolean}
+     */
+    boolean delete(Long resumeId);
+
 }

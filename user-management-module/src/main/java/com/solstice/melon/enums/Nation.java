@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Time 14:18
  * @Description 56个民族枚举
  */
-public enum Nation implements IEnum {
+public enum Nation implements BaseEnum {
 
     HAN_NATIONNALITY(0,"汉族","Han Nationality"),
     ZHUANG_NATIONNALITY(1,"壮族","Zhuang Nationality"),
