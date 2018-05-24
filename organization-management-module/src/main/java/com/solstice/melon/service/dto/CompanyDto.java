@@ -1,6 +1,7 @@
 package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.solstice.melon.enums.CompanyStatusEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -54,7 +55,7 @@ public class CompanyDto implements Serializable {
     /**
      * 公司是否上市,0表示未上市，1表示已上市
      */
-    private Byte listed;
+    private CompanyStatusEnum companyStatus;
     /**
      * 公司成立时间
      */
@@ -134,12 +135,12 @@ public class CompanyDto implements Serializable {
         this.phone = phone;
     }
 
-    public Byte getListed() {
-        return listed;
+    public CompanyStatusEnum getCompanyStatus() {
+        return companyStatus;
     }
 
-    public void setListed(Byte listed) {
-        this.listed = listed;
+    public void setCompanyStatus(CompanyStatusEnum companyStatus) {
+        this.companyStatus = companyStatus;
     }
 
     public Date getCreateTime() {

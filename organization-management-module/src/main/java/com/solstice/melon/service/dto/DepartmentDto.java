@@ -16,13 +16,13 @@ public class DepartmentDto implements Serializable {
 
     private Long id;
     /**
-     * 部门所属公司Id
+     * 部门所属公司
      */
-    private CompanyDto companyDto;
+    private String company;
     /**
-     * 部门负责人Id
+     * 部门负责人
      */
-    private Long headerId;
+    private String header;
     /**
      * 部门名称
      */
@@ -40,20 +40,20 @@ public class DepartmentDto implements Serializable {
         this.id = id;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public String getCompany() {
+        return company;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
-    public Long getHeaderId() {
-        return headerId;
+    public String getHeader() {
+        return header;
     }
 
-    public void setHeaderId(Long headerId) {
-        this.headerId = headerId;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public String getName() {
