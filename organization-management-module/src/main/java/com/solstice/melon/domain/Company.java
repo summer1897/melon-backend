@@ -1,6 +1,7 @@
 package com.solstice.melon.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.solstice.melon.enums.CompanyStatusEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ public class Company extends BaseDomain implements Serializable {
     /**
      * 公司创始人
      */
-    private String founder;
+    private Long founderId;
     /**
      * 公司经营类型
      */
@@ -53,7 +54,7 @@ public class Company extends BaseDomain implements Serializable {
     /**
      * 公司是否上市,0表示未上市，1表示已上市
      */
-    private Byte listed;
+    private CompanyStatusEnum companyStatus;
     /**
      * 公司成立时间
      */
@@ -69,12 +70,12 @@ public class Company extends BaseDomain implements Serializable {
         this.name = name;
     }
 
-    public String getFounder() {
-        return founder;
+    public Long getFounderId() {
+        return founderId;
     }
 
-    public void setFounder(String founder) {
-        this.founder = founder;
+    public void setFounderId(Long founderId) {
+        this.founderId = founderId;
     }
 
     public String getBusinessType() {
@@ -125,12 +126,12 @@ public class Company extends BaseDomain implements Serializable {
         this.phone = phone;
     }
 
-    public Byte getListed() {
-        return listed;
+    public CompanyStatusEnum getCompanyStatus() {
+        return companyStatus;
     }
 
-    public void setListed(Byte listed) {
-        this.listed = listed;
+    public void setCompanyStatus(CompanyStatusEnum companyStatus) {
+        this.companyStatus = companyStatus;
     }
 
     public Date getCreateTime() {

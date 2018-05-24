@@ -1,4 +1,4 @@
-package com.solstice.melon.domain;
+package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,54 +11,53 @@ import java.util.Date;
  *
  * @Projcet melon
  * @Author solstice
- * @Date 2018/5/23
- * @Time 11:06
- * @Description 部门项目组实体类
+ * @Date 2018/5/24
+ * @Time 11:20
+ * @Description
  */
-public class ProjectGroup extends BaseDomain implements Serializable {
-    private static final long serialVersionUID = -3137093269299909489L;
+public class ProjectGroupDto implements Serializable {
+    private static final long serialVersionUID = -8423678163640062893L;
 
+    private Long id;
     /**
      * 项目组组长Id
      */
-    private Long groupLeaderId;
+    private String groupLeader;
     /**
-     * 项目组所属部门Id
+     * 项目组所属部门信息
      */
-    private Long departmentId;
+    private String department;
     private String name;
     /**
      * 项目组主要职责
      */
     private String responsibility;
-
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    public ProjectGroup() {
+    public Long getId() {
+        return id;
     }
 
-    public ProjectGroup(Long departmentId, String name, String responsibility) {
-        this.departmentId = departmentId;
-        this.name = name;
-        this.responsibility = responsibility;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getGroupLeaderId() {
-        return groupLeaderId;
+    public String getGroupLeader() {
+        return groupLeader;
     }
 
-    public void setGroupLeaderId(Long groupLeaderId) {
-        this.groupLeaderId = groupLeaderId;
+    public void setGroupLeader(String groupLeader) {
+        this.groupLeader = groupLeader;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getName() {
