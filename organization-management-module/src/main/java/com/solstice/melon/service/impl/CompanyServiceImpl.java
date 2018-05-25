@@ -41,7 +41,17 @@ public class CompanyServiceImpl extends BaseServiceImpl<CompanyMapper,Company> i
     @Override
     public CompanyDto queryOne(String name) {
         log.info("Service layer: CompanyServiceImpl.queryOne({})",name);
-        return this.selectOne(Condition.create().eq("name",name));
+        Company company = this.selectOne(Condition.create().eq("name", name));
+        List<Company> companies = Lists.newArrayList();
+        if (ObjectUtils.isNotNull(company)) {
+            companies.add(company);
+        }
+        CompanyDto companyDto = null;
+        List<CompanyDto> companyDtos = this.assemble(companies);
+        if (ObjectUtils.isNotEmpty(companies)) {
+            companyDto = companyDtos.get(0);
+        }
+        return companyDto;
     }
 
     @Override
