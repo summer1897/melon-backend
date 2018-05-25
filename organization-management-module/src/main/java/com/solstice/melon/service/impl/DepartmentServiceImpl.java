@@ -12,7 +12,9 @@ import com.solstice.melon.domain.Department;
 import com.solstice.melon.service.IAccountCredentialsService;
 import com.solstice.melon.service.ICompanyService;
 import com.solstice.melon.service.IDepartmentService;
+import com.solstice.melon.service.IProjectGroupService;
 import com.solstice.melon.service.dto.DepartmentDto;
+import com.solstice.melon.service.dto.ProjectGroupDto;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.ObjectUtils;
 import com.summer.base.utils.PropertyUtils;
@@ -45,6 +47,21 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentMapper,Depa
     private ICompanyService companyService;
     @Autowired
     private IAccountCredentialsService accountCredentialsService;
+    @Autowired
+    private IProjectGroupService projectGroupService;
+
+    @Override
+    public List<DepartmentDto> queryByCompanyId(Long companyId) {
+        log.info("Service layer: DepartmentServiceImpl.queryByCompanyId({})",companyId);
+        return this.assemble(this.selectList(Condition.create().eq("company_id",companyId)));
+    }
+
+    @Override
+    public Page<DepartmentDto> queryByCompanyId(Long companyId,Integer pageNum, Integer pageSize) {
+        log.info("Service layer: DepartmentServiceImpl.queryAll({},{},{})",companyId,pageNum,pageSize);
+        Page<Department> page = new Page<>(pageNum, pageSize);
+        return this.assemblePage(this.selectPage(page,Condition.create().eq("company_id",companyId)));
+    }
 
     @Override
     public List<DepartmentDto> queryIn(String column, Collection<?> values) {
@@ -88,6 +105,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentMapper,Depa
     private List<DepartmentDto> assemble(List<Department> departments) {
         List<DepartmentDto> departmentDtos = Lists.newArrayList();
         if (ObjectUtils.isNotEmpty(departments)) {
+            //获取部门所属公司信息
             List<Long> companyIds = PropertyUtils.extractPropertyFromDomain(departments,"companyId",Long.class);
             List<Company> companies = companyService.selectList(Condition.create().in("id", companyIds));
             Map<Long, Company> companyMap = Maps.newHashMap();
@@ -95,11 +113,23 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentMapper,Depa
                 companyMap.putAll(PropertyUtils.extractPropertyFromDomainToMap(companies, "id", Long.class));
             }
 
+            //获取部门负责人信息
             List<Long> headerIds = PropertyUtils.extractPropertyFromDomain(departments,"headerId",Long.class);
             List<AccountCredentials> accountCredentials = accountCredentialsService.selectList(Condition.create().in("id", headerIds));
             Map<Long,AccountCredentials> accountCredentialsMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(accountCredentials)) {
                 accountCredentialsMap.putAll(PropertyUtils.extractPropertyFromDomainToMap(accountCredentials, "id", Long.class));
+            }
+
+            //获取部门项目组信息
+            List<Long> departmentIds = PropertyUtils.extractPropertyFromDomain(departments,"id",Long.class);
+            Map<Long,List<ProjectGroupDto>> projectGroupDtosMap = projectGroupService.queryByDepartmentIds(departmentIds);
+            Map<Long,List<String>> projectGroupNamesMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(projectGroupDtosMap)) {
+                for (Long departmentId: projectGroupDtosMap.keySet()) {
+                    List<ProjectGroupDto> projectGroupDtos = projectGroupDtosMap.get(departmentId);
+                    projectGroupNamesMap.put(departmentId,PropertyUtils.extractPropertyFromDomain(projectGroupDtos,"name",String.class));
+                }
             }
 
             departmentDtos.addAll(BeanCloneUtils.clone(departments,Department.class,DepartmentDto.class));
@@ -109,6 +139,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentMapper,Depa
                 DepartmentDto departmentDto = departmentDtoMap.get(id);
                 departmentDto.setCompany(companyMap.get(department.getCompanyId()).getName());
                 departmentDto.setHeader(accountCredentialsMap.get(department.getHeaderId()).getUserName());
+                departmentDto.setGroups(projectGroupNamesMap.get(id));
             }
         }
         return departmentDtos;

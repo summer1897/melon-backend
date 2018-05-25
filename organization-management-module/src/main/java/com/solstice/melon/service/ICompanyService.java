@@ -19,6 +19,20 @@ import java.util.List;
 public interface ICompanyService extends IBaseService<Company> {
 
     /**
+     *
+     * @return {@link List<CompanyDto>}
+     */
+    List<CompanyDto> queryAll();
+
+    /**
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return {@link Page<CompanyDto>}
+     */
+    Page<CompanyDto> queryAll(Integer pageNum,Integer pageSize);
+
+    /**
      * 根据公司名称查找公司
      * @param name
      * @return {@link CompanyDto}

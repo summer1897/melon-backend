@@ -5,6 +5,7 @@ import com.solstice.melon.domain.ProjectGroup;
 import com.solstice.melon.service.dto.ProjectGroupDto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Intellij IDEA
@@ -35,6 +36,13 @@ public interface IProjectGroupService extends IBaseService<ProjectGroup> {
 
     /**
      *
+     * @param departmentIds
+     * @return {@link List<ProjectGroupDto>}
+     */
+    Map<Long,List<ProjectGroupDto>> queryByDepartmentIds(List<Long> departmentIds);
+
+    /**
+     *
      * @param name
      * @return {@link List <ProjectGroup>}
      */
@@ -45,7 +53,7 @@ public interface IProjectGroupService extends IBaseService<ProjectGroup> {
      * @param name
      * @param pageNum
      * @param pageSize
-     * @return {@link Page<ProjectGroup>}
+     * @return {@link Page<ProjectGroupDto>}
      */
     Page<ProjectGroupDto> queryLikeByName(String name, Integer pageNum, Integer pageSize);
 

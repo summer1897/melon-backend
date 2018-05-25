@@ -39,6 +39,16 @@ public class CompanyServiceImpl extends BaseServiceImpl<CompanyMapper,Company> i
     private IAccountCredentialsService accountCredentialsService;
 
     @Override
+    public List<CompanyDto> queryAll() {
+        return this.assemble(super.selectAll());
+    }
+
+    @Override
+    public Page<CompanyDto> queryAll(Integer pageNum, Integer pageSize) {
+        return this.assemblePage(super.selectAll(pageNum,pageSize));
+    }
+
+    @Override
     public CompanyDto queryOne(String name) {
         log.info("Service layer: CompanyServiceImpl.queryOne({})",name);
         Company company = this.selectOne(Condition.create().eq("name", name));

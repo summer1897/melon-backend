@@ -1,4 +1,4 @@
-package com.solstice.melon.service.dto;
+package com.solstice.melon.controller.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @Projcet melon
  * @Author solstice
- * @Date 2018/5/24
- * @Time 11:20
+ * @Date 2018/5/25
+ * @Time 15:20
  * @Description
  */
-public class ProjectGroupDto implements Serializable {
-    private static final long serialVersionUID = -8423678163640062893L;
+public class ProjectGroupVo implements Serializable{
+    private static final long serialVersionUID = 1946575548422295590L;
 
     private Long id;
     /**

@@ -189,15 +189,15 @@ CREATE TABLE IF NOT EXISTS project_group (
   FOREIGN KEY (department_id) REFERENCES department (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '部门项目组信息表';
 
-# DROP TABLE IF EXISTS user_group;
-# CREATE TABLE IF NOT EXISTS user_group (
-#   id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
-#   user_id BIGINT NOT NULL COMMENT '用户Id',
-#   group_id BIGINT NOT NULL COMMENT '项目组Id',
-#   modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
-#   create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
-#   PRIMARY KEY (id)
-# ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户、项目组管理表';
+DROP TABLE IF EXISTS project_group_member;
+CREATE TABLE IF NOT EXISTS project_group_member (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  member_id BIGINT NOT NULL COMMENT '用户Id',
+  project_group_id BIGINT NOT NULL COMMENT '项目组Id',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户、项目组管理表';
 
 DROP TABLE IF EXISTS project;
 CREATE TABLE IF NOT EXISTS project (

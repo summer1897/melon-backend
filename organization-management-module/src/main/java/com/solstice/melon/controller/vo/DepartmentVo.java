@@ -1,4 +1,4 @@
-package com.solstice.melon.service.dto;
+package com.solstice.melon.controller.vo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.List;
  *
  * @Projcet melon
  * @Author solstice
- * @Date 2018/5/23
- * @Time 15:41
+ * @Date 2018/5/25
+ * @Time 15:20
  * @Description
  */
-public class DepartmentDto implements Serializable {
-    private static final long serialVersionUID = 6764750312893628318L;
+public class DepartmentVo implements Serializable {
+    private static final long serialVersionUID = 3447648945985995771L;
 
     private Long id;
     /**
