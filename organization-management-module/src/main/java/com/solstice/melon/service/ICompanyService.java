@@ -2,7 +2,7 @@ package com.solstice.melon.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.solstice.melon.domain.Company;
-import com.solstice.melon.enums.CompanyStatusEnum;
+import com.solstice.melon.enums.CompanyStatus;
 import com.solstice.melon.service.dto.CompanyDto;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public interface ICompanyService extends IBaseService<Company> {
      * @param CompanyDtoStatus
      * @return {@link List<CompanyDto>}
      */
-    List<CompanyDto> queryByStatus(CompanyStatusEnum CompanyDtoStatus);
+    List<CompanyDto> queryByStatus(CompanyStatus CompanyDtoStatus);
 
     /**
      *
@@ -69,6 +69,6 @@ public interface ICompanyService extends IBaseService<Company> {
      * @param pageSize
      * @return {@link Page<CompanyDto>}
      */
-    Page<CompanyDto> queryByStatus(CompanyStatusEnum CompanyDtoStatus, Integer pageNum, Integer pageSize);
+    Page<CompanyDto> queryByStatus(CompanyStatus CompanyDtoStatus, Integer pageNum, Integer pageSize);
 
 }

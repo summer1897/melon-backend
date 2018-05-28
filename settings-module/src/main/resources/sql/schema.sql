@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS company (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
   name VARCHAR(50) NOT NULL COMMENT '公司名称',
   founder VARCHAR(30) COMMENT '公司创始人',
-  bussiness_type VARCHAR(50) COMMENT '公司经营类型',
+  business_type VARCHAR(50) COMMENT '公司经营类型',
   address VARCHAR(200) NOT NULL COMMENT '公司地址',
   registered_assets VARCHAR(20) COMMENT '公司注册资产',
   introduction VARCHAR(500) COMMENT '公司简介',
