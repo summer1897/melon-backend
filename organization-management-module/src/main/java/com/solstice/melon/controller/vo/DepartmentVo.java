@@ -1,6 +1,10 @@
 package com.solstice.melon.controller.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +40,11 @@ public class DepartmentVo implements Serializable {
      * 部门项目组
      */
     private List<String> groups;
+
+    /**修改时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -83,5 +92,13 @@ public class DepartmentVo implements Serializable {
 
     public void setGroups(List<String> groups) {
         this.groups = groups;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
