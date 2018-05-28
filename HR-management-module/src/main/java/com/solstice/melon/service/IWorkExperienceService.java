@@ -11,5 +11,5 @@ import com.solstice.melon.domain.WorkExperience;
  * @Time 9:58
  * @Description
  */
-public interface IWorkExperienceService extends IBaseService<WorkExperience> {
+public interface IWorkExperienceService extends IBaseResumeService<WorkExperience> {
 }

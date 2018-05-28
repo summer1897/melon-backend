@@ -79,7 +79,13 @@ public class ResumeManagerImpl implements IResumeManager {
             for (ResumeDto resumeDto : resumeDtos) {
                 Long resumeId = resumeDto.getId();
 
-                List<EducationalExperience> educationalExperiences = educationalExperienceService.queryByResumeId(resumeId);
+
+                List<EducationalExperience> educationalExperiences = null;
+                try {
+                    educationalExperiences = educationalExperienceService.queryByResumeId(resumeId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (ObjectUtils.isNotEmpty(educationalExperiences)) {
                     resumeDto.setEducationalExperienceDtos(BeanCloneUtils.clone(educationalExperiences,EducationalExperience.class,
                                                                                     EducationalExperienceDto.class));

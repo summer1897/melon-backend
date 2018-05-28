@@ -69,10 +69,10 @@ public class ExceptionHandlers {
         return ResultVo.fail("接口访问令牌(token)已过期");
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @ExceptionHandler(Exception.class)
     public ResultVo generalExceptionHandler(Exception e) {
         return ResultVo.fail(e.getMessage());
-    }
+    }*/
 
 }

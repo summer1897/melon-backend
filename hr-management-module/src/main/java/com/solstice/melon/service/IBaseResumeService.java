@@ -15,7 +15,7 @@ import java.util.List;
  * @Description 定义一个继承 {@link IService}类的基础接口，并定义一些与{@link com.solstice.melon.domain.Resume}
  * 相关的通用方法
  */
-public interface IBaseService<T> extends IService<T> {
+public interface IBaseResumeService<T> extends IService<T> {
 
     /**
      * 根据简历Id查询与简历相关的多个信息

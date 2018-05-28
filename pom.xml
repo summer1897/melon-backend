@@ -12,9 +12,9 @@
         <module>common-module</module>
         <module>authority-management-module</module>
         <module>settings-module</module>
-        <module>HR-management-module</module>
         <module>project-management-module</module>
         <module>organization-management-module</module>
+        <module>hr-management-module</module>
     </modules>
 
 

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @Description
  */
 @Service("schoolActivitiesService")
-public class SchoolActivitiesServiceImpl extends BaseServiceImpl<SchoolActivitiesMapper,SchoolActivities>
+public class SchoolActivitiesServiceImpl extends BaseResumeServiceImpl<SchoolActivitiesMapper,SchoolActivities>
                                                 implements ISchoolActivitiesService {
 
     private static final Logger log = LoggerFactory.getLogger(SchoolActivitiesServiceImpl.class);
