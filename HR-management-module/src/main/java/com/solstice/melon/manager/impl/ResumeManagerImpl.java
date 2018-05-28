@@ -2,12 +2,14 @@ package com.solstice.melon.manager.impl;
 
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.solstice.melon.domain.*;
 import com.solstice.melon.manager.IResumeManager;
 import com.solstice.melon.service.*;
 import com.solstice.melon.service.dto.*;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.ObjectUtils;
+import com.summer.base.utils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Intellij IDEA
@@ -55,7 +58,7 @@ public class ResumeManagerImpl implements IResumeManager {
         }
 
         //填充简历信息
-        this.composeResume(resumeDtos);
+        this.assemble(resumeDtos);
         return resumeDtos;
     }
 
@@ -74,18 +77,85 @@ public class ResumeManagerImpl implements IResumeManager {
         return true;
     }
 
-    private void composeResume(List<ResumeDto> resumeDtos) {
+    private void assemble(List<ResumeDto> resumeDtos) {
         if (ObjectUtils.isNotEmpty(resumeDtos)) {
+            List<Long> resumeIds = PropertyUtils.extractPropertyFromDomain(resumeDtos,"id",Long.class);
+
+            //教育经历
+            List<EducationalExperience> educationalExperiences = educationalExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
+            Map<Long,List<EducationalExperience>> educationalExperieceMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(educationalExperiences)) {
+                educationalExperieceMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(educationalExperiences, "resume_id", Long.class));
+            }
+
+            //在校活动
+            List<SchoolActivities> schoolActivities = schoolActivitiesService.selectList(Condition.create().in("resume_id", resumeIds));
+            Map<Long,List<SchoolActivities>> schoolActivitiesMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(schoolActivities)) {
+                schoolActivitiesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolActivities, "resume_id", Long.class));
+            }
+
+            //在校奖励
+            List<SchoolReward> schoolRewards = schoolRewardService.selectList(Condition.create().in("resume_id", resumeIds));
+            Map<Long,List<SchoolReward>> schoolRewardsMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(schoolRewards)) {
+                schoolRewardsMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolRewards, "resume_id", Long.class));
+            }
+
+            //工作经历
+            List<WorkExperience> workExperiences = workExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
+            Map<Long,List<WorkExperience>> workExperiencesMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(workExperiences)) {
+                workExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(workExperiences, "resume_id", Long.class));
+            }
+
+            //实习经历
+            List<InternshipExperience> internshipExperiences = workExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
+            Map<Long,List<InternshipExperience>> internshipExperiencesMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(internshipExperiences)) {
+                internshipExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(internshipExperiences, "resume_id", Long.class));
+            }
+
             for (ResumeDto resumeDto : resumeDtos) {
                 Long resumeId = resumeDto.getId();
 
-
-                List<EducationalExperience> educationalExperiences = null;
-                try {
-                    educationalExperiences = educationalExperienceService.queryByResumeId(resumeId);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                List<EducationalExperience> educationalExperiences1 = educationalExperieceMap.get(resumeId);
+                if (ObjectUtils.isNotEmpty(educationalExperiences1)) {
+                    resumeDto.setEducationalExperienceDtos(BeanCloneUtils.clone(educationalExperiences1,
+                                                                                EducationalExperience.class,
+                                                                                EducationalExperienceDto.class));
                 }
+
+                List<SchoolActivities> schoolActivities1 = schoolActivitiesMap.get(resumeId);
+                if (ObjectUtils.isNotEmpty(schoolActivities1)) {
+                    resumeDto.setSchoolActivitiesDtos(BeanCloneUtils.clone(schoolActivities1,
+                                                                            SchoolActivities.class,
+                                                                            SchoolActivitiesDto.class));
+                }
+
+                List<SchoolReward> schoolRewards1 = schoolRewardsMap.get(resumeId);
+                if (ObjectUtils.isNotEmpty(schoolRewards1)) {
+                    resumeDto.setSchoolRewardDtos(BeanCloneUtils.clone(schoolRewards1,
+                                                                        SchoolReward.class,
+                                                                        SchoolRewardDto.class));
+                }
+
+                List<WorkExperience> workExperiences1 = workExperiencesMap.get(resumeId);
+                if (ObjectUtils.isNotEmpty(workExperiences1)) {
+                    resumeDto.setWorkExperienceDtos(BeanCloneUtils.clone(workExperiences1,
+                                                                        WorkExperience.class,
+                                                                        WorkExperienceDto.class));
+                }
+
+                List<InternshipExperience> internshipExperiences1 = internshipExperiencesMap.get(resumeId);
+                if (ObjectUtils.isNotEmpty(internshipExperiences1)) {
+                    resumeDto.setInternshipExperienceDtos(BeanCloneUtils.clone(internshipExperiences1,
+                                                                                InternshipExperience.class,
+                                                                                InternshipExperienceDto.class));
+                }
+
+
+               /* List<EducationalExperience> educationalExperiences = educationalExperiences = educationalExperienceService.queryByResumeId(resumeId);
                 if (ObjectUtils.isNotEmpty(educationalExperiences)) {
                     resumeDto.setEducationalExperienceDtos(BeanCloneUtils.clone(educationalExperiences,EducationalExperience.class,
                                                                                     EducationalExperienceDto.class));
@@ -109,7 +179,7 @@ public class ResumeManagerImpl implements IResumeManager {
                 List<InternshipExperience> internshipExperiences = internshipExperienceService.queryByResumeId(resumeId);
                 if (ObjectUtils.isNotEmpty(internshipExperiences)) {
                     resumeDto.setInternshipExperienceDtos(BeanCloneUtils.clone(internshipExperiences,InternshipExperience.class,InternshipExperienceDto.class));
-                }
+                }*/
             }
         }
     }
