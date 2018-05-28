@@ -32,10 +32,6 @@ public class ProjectGroup extends BaseDomain implements Serializable {
      */
     private String responsibility;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-
     public ProjectGroup() {
     }
 
@@ -77,11 +73,4 @@ public class ProjectGroup extends BaseDomain implements Serializable {
         this.responsibility = responsibility;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

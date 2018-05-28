@@ -83,43 +83,43 @@ public class ResumeManagerImpl implements IResumeManager {
 
             //教育经历
             List<EducationalExperience> educationalExperiences = educationalExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
-            Map<Long,List<EducationalExperience>> educationalExperieceMap = Maps.newHashMap();
+            Map<Long,List<EducationalExperience>> educationalExperienceMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(educationalExperiences)) {
-                educationalExperieceMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(educationalExperiences, "resume_id", Long.class));
+                educationalExperienceMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(educationalExperiences, "resumeId", Long.class));
             }
 
             //在校活动
             List<SchoolActivities> schoolActivities = schoolActivitiesService.selectList(Condition.create().in("resume_id", resumeIds));
             Map<Long,List<SchoolActivities>> schoolActivitiesMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(schoolActivities)) {
-                schoolActivitiesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolActivities, "resume_id", Long.class));
+                schoolActivitiesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolActivities, "resumeId", Long.class));
             }
 
             //在校奖励
             List<SchoolReward> schoolRewards = schoolRewardService.selectList(Condition.create().in("resume_id", resumeIds));
             Map<Long,List<SchoolReward>> schoolRewardsMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(schoolRewards)) {
-                schoolRewardsMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolRewards, "resume_id", Long.class));
+                schoolRewardsMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(schoolRewards, "resumeId", Long.class));
             }
 
             //工作经历
             List<WorkExperience> workExperiences = workExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
             Map<Long,List<WorkExperience>> workExperiencesMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(workExperiences)) {
-                workExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(workExperiences, "resume_id", Long.class));
+                workExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(workExperiences, "resumeId", Long.class));
             }
 
             //实习经历
-            List<InternshipExperience> internshipExperiences = workExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
+            List<InternshipExperience> internshipExperiences = internshipExperienceService.selectList(Condition.create().in("resume_id", resumeIds));
             Map<Long,List<InternshipExperience>> internshipExperiencesMap = Maps.newHashMap();
             if (ObjectUtils.isNotEmpty(internshipExperiences)) {
-                internshipExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(internshipExperiences, "resume_id", Long.class));
+                internshipExperiencesMap.putAll(PropertyUtils.extractPropertyFromDomainToMapList(internshipExperiences, "resumeId", Long.class));
             }
 
             for (ResumeDto resumeDto : resumeDtos) {
                 Long resumeId = resumeDto.getId();
 
-                List<EducationalExperience> educationalExperiences1 = educationalExperieceMap.get(resumeId);
+                List<EducationalExperience> educationalExperiences1 = educationalExperienceMap.get(resumeId);
                 if (ObjectUtils.isNotEmpty(educationalExperiences1)) {
                     resumeDto.setEducationalExperienceDtos(BeanCloneUtils.clone(educationalExperiences1,
                                                                                 EducationalExperience.class,

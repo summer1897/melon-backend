@@ -1,5 +1,6 @@
 package com.solstice.melon.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.base.enums.HttpStatus;
 import com.solstice.melon.controller.vo.DepartmentVo;
@@ -36,7 +37,7 @@ public class DepartmentController {
 
     @PostMapping("/add.json")
     public ResultVo add(@RequestBody Department department) {
-        log.info("Controller layer: ProjectGroupController.add({})",department);
+        log.info("Controller layer: DepartmentController.add({})", JSON.toJSONString(department,true));
         Assert.notNull(department,"添加部门信息为空");
         boolean success = departmentService.insert(department);
         if (success) {
