@@ -15,6 +15,7 @@
         <module>project-management-module</module>
         <module>organization-management-module</module>
         <module>hr-management-module</module>
+        <module>blog-module</module>
     </modules>
 
 

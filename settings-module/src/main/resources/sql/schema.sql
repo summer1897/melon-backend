@@ -238,15 +238,15 @@ CREATE TABLE IF NOT EXISTS project_type (
   PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目类型';
 
-DROP TABLE IF EXISTS project_member;
-CREATE TABLE IF NOT EXISTS project_member (
+DROP TABLE IF EXISTS personal_project_experience;
+CREATE TABLE IF NOT EXISTS personal_project_experience (
   id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
   project_id BIGINT NOT NULL COMMENT '项目Id',
-  member_id BIGINT NOT NULL COMMENT '项目成员Id',
+  participator_id BIGINT NOT NULL COMMENT '项目参与者Id',
   modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '信息修改日期',
   create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
   PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目成员关联表';
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '个人项目经历';
 
 DROP TABLE IF EXISTS project_company;
 CREATE TABLE IF NOT EXISTS project_company (
@@ -267,6 +267,14 @@ CREATE TABLE IF NOT EXISTS project_department (
   create_date DATETIME NOT NULL DEFAULT now() COMMENT '信息创建日期',
   PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目与合作部门关联关系表';
+
+DROP TABLE IF EXISTS project_team;
+CREATE TABLE IF NOT EXISTS project_team (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  project_id BIGINT NOT NULL COMMENT '项目Id',
+  team_id BIGINT NOT NULL COMMENT '项目组Id',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '项目与项目组关联表';
 
 DROP TABLE IF EXISTS task;
 CREATE TABLE IF NOT EXISTS task (
@@ -360,4 +368,65 @@ CREATE TABLE IF NOT EXISTS role_permission (
   create_date DATETIME NOT NULL DEFAULT now() COMMENT '创建时间',
   modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
   PRIMARY KEY (id)
-)ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户角色权限关联表';
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户角色权限关联表';
+
+#博客相关表
+DROP TABLE IF EXISTS blog_essay;
+CREATE TABLE IF NOT EXISTS blog_essay(
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '随笔Id',
+  author_id BIGINT NOT NULL COMMENT '随笔作者Id',
+  reprinted_id BIGINT COMMENT '转载随笔Id',
+  category_id BIGINT COMMENT '随笔大分类Id',
+  essay_category_id BIGINT COMMENT '个人随笔分类Id',
+  title VARCHAR(300) NOT NULL COMMENT '随笔标题',
+  content TEXT COMMENT '随笔内容',
+  visited_times INT DEFAULT 0 COMMENT '访问次数',
+  liked_times INT DEFAULT 0 COMMENT '点赞次数',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '随笔创建时间',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '博客随笔表';
+
+DROP TABLE IF EXISTS blog_category;
+CREATE TABLE IF NOT EXISTS blog_category(
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '类别Id',
+  name VARCHAR(100) NOT NULL COMMENT '类别名',
+  description VARCHAR(500) COMMENT '类别信息描述',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '创建时间',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '随笔类别表';
+
+DROP TABLE IF EXISTS blog_essay_category;
+CREATE TABLE IF NOT EXISTS blog_essay_category (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '类别Id',
+  creator_id BIGINT NOT NULL COMMENT '类别创建者Id',
+  name VARCHAR(100) NOT NULL COMMENT '类别名',
+  description VARCHAR(500) COMMENT '类别信息描述',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '创建时间',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '个人随笔类别表';
+
+DROP TABLE IF EXISTS blog_essay_comments;
+CREATE TABLE IF NOT EXISTS blog_essay_comments (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '评论Id',
+  essay_id BIGINT NOT NULL COMMENT '评论随笔Id',
+  commentator_id BIGINT NOT NULL COMMENT '评论人Id',
+  comment_content TEXT COMMENT '评论内容',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '评论创建时间',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '随笔评论表';
+
+DROP TABLE IF EXISTS blog_essay_tag;
+CREATE TABLE IF NOT EXISTS blog_essay_tag (
+  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '标签Id',
+  essay_id BIGINT NOT NULL COMMENT '标签所属随笔Id',
+  name VARCHAR(200) NOT NULL COMMENT '标签名',
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '创建时间',
+  modify_date DATETIME NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '随笔标签表';
+
+

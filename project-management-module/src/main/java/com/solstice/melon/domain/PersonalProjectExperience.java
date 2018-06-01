@@ -11,13 +11,13 @@ import java.io.Serializable;
  * @Time 17:08
  * @Description 项目成员关联表
  */
-public class ProjectMember extends BaseDomain implements Serializable {
+public class PersonalProjectExperience extends BaseDomain implements Serializable {
     private static final long serialVersionUID = -695545235176297601L;
 
     private Long projectId;
     private Long memberId;
 
-    public ProjectMember(Long projectId, Long memberId) {
+    public PersonalProjectExperience(Long projectId, Long memberId) {
         this.projectId = projectId;
         this.memberId = memberId;
     }

@@ -13,46 +13,51 @@
     <packaging>war</packaging>
 
     <name>settings-module</name>
-    <dependencies>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>common-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>authority-management-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>project-management-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>project-management-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>organization-management-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.solstice.melon</groupId>
-            <artifactId>hr-management-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <melon.project.version>1.0.0</melon.project.version>
     </properties>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>common-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>authority-management-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>project-management-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>project-management-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>organization-management-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>hr-management-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>blog-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>settings-module</finalName>

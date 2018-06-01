@@ -1,3 +1,4 @@
+/*
 package com.solstice.melon.service.impl;
 
 import com.baomidou.mybatisplus.mapper.Condition;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+*/
 /**
  * Created by Intellij IDEA
  *
@@ -21,7 +23,8 @@ import java.util.List;
  * @Date 2018/5/25
  * @Time 10:52
  * @Description
- */
+ *//*
+
 @Service("projectMemberService")
 public class ProjectMemberServiceImpl extends BaseServiceImpl<ProjectMemberMapper,ProjectMember>
                                                             implements IProjectMemberService {
@@ -50,3 +53,4 @@ public class ProjectMemberServiceImpl extends BaseServiceImpl<ProjectMemberMappe
         return projectIds;
     }
 }
+*/
