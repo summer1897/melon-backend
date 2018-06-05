@@ -2,7 +2,7 @@ package com.solstice.melon.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.solstice.melon.domain.Company;
-import com.solstice.melon.enums.CompanyStatusEnum;
+import com.solstice.melon.enums.CompanyStatus;
 import com.solstice.melon.service.dto.CompanyDto;
 
 import java.util.List;
@@ -17,6 +17,20 @@ import java.util.List;
  * @Description 公司Service层操作接口定义
  */
 public interface ICompanyService extends IBaseService<Company> {
+
+    /**
+     *
+     * @return {@link List<CompanyDto>}
+     */
+    List<CompanyDto> queryAll();
+
+    /**
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return {@link Page<CompanyDto>}
+     */
+    Page<CompanyDto> queryAll(Integer pageNum,Integer pageSize);
 
     /**
      * 根据公司名称查找公司
@@ -46,7 +60,7 @@ public interface ICompanyService extends IBaseService<Company> {
      * @param CompanyDtoStatus
      * @return {@link List<CompanyDto>}
      */
-    List<CompanyDto> queryByStatus(CompanyStatusEnum CompanyDtoStatus);
+    List<CompanyDto> queryByStatus(CompanyStatus CompanyDtoStatus);
 
     /**
      *
@@ -55,6 +69,6 @@ public interface ICompanyService extends IBaseService<Company> {
      * @param pageSize
      * @return {@link Page<CompanyDto>}
      */
-    Page<CompanyDto> queryByStatus(CompanyStatusEnum CompanyDtoStatus, Integer pageNum, Integer pageSize);
+    Page<CompanyDto> queryByStatus(CompanyStatus CompanyDtoStatus, Integer pageNum, Integer pageSize);
 
 }

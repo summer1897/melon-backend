@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @Description
  */
 @Service("schoolRewardService")
-public class SchoolRewardServiceImpl extends BaseServiceImpl<SchoolRewardMapper,SchoolReward>
+public class SchoolRewardServiceImpl extends BaseResumeServiceImpl<SchoolRewardMapper,SchoolReward>
                                                 implements ISchoolRewardService {
 
     private static final Logger log = LoggerFactory.getLogger(SchoolRewardServiceImpl.class);

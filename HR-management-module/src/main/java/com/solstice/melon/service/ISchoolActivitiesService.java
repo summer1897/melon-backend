@@ -11,5 +11,5 @@ import com.solstice.melon.domain.SchoolActivities;
  * @Time 9:56
  * @Description
  */
-public interface ISchoolActivitiesService extends IBaseService<SchoolActivities> {
+public interface ISchoolActivitiesService extends IBaseResumeService<SchoolActivities> {
 }

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Intellij IDEA
@@ -35,6 +36,10 @@ public class ProjectGroupDto implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    /**
+     * 项目组成员名单
+     */
+    private List<String> groupMembers;
 
     public Long getId() {
         return id;
@@ -82,5 +87,13 @@ public class ProjectGroupDto implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public List<String> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<String> groupMembers) {
+        this.groupMembers = groupMembers;
     }
 }

@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
  * @Description
  */
 @Service("educationalExperienceService")
-public class EducationalExperienceServiceImpl extends BaseServiceImpl<EducationalExperienceMapper,EducationalExperience>
-                                                implements IEducationalExperienceService{
+public class EducationalExperienceServiceImpl extends BaseResumeServiceImpl<EducationalExperienceMapper,EducationalExperience>
+                                                implements IEducationalExperienceService {
 
     private static final Logger log = LoggerFactory.getLogger(EducationalExperienceServiceImpl.class);
 }

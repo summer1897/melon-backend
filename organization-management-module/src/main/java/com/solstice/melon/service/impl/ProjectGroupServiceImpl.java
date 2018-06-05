@@ -1,5 +1,6 @@
 package com.solstice.melon.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
@@ -10,6 +11,7 @@ import com.solstice.melon.domain.Department;
 import com.solstice.melon.domain.ProjectGroup;
 import com.solstice.melon.service.IAccountCredentialsService;
 import com.solstice.melon.service.IDepartmentService;
+import com.solstice.melon.service.IProjectGroupMemberService;
 import com.solstice.melon.service.IProjectGroupService;
 import com.solstice.melon.service.dto.ProjectGroupDto;
 import com.summer.base.utils.BeanCloneUtils;
@@ -43,6 +45,8 @@ public class ProjectGroupServiceImpl extends BaseServiceImpl<ProjectGroupMapper,
     private IDepartmentService departmentService;
     @Autowired
     private IAccountCredentialsService accountCredentialsService;
+    @Autowired
+    private IProjectGroupMemberService projectGroupMemberService;
 
     @Override
     public List<ProjectGroupDto> queryByDepartmentId(Long departmentId) {
@@ -55,6 +59,37 @@ public class ProjectGroupServiceImpl extends BaseServiceImpl<ProjectGroupMapper,
         log.info("Service layer: ProjectGroupServiceImpl.queryByDepartmentId({},{},{})",departmentId,pageNum,pageSize);
         Page<ProjectGroup> page = new Page<>(pageNum,pageSize);
         return this.assemblePaeg(this.selectPage(page,Condition.create().eq("department_id",departmentId)));
+    }
+
+    @Override
+    public Map<Long,List<ProjectGroupDto>> queryByDepartmentIds(List<Long> departmentIds) {
+        log.info("Service layer: ProjectGroupServiceImpl.queryByDepartmentIds({})", JSON.toJSONString(departmentIds,true));
+
+        List<ProjectGroup> projectGroups = this.selectList(Condition.create().in("department_id", departmentIds));
+        Map<Long,List<ProjectGroupDto>> projectGroupDtoMaps = Maps.newHashMap();
+        if (ObjectUtils.isNotEmpty(projectGroups)) {
+            List<ProjectGroupDto> projectGroupDtos = this.assemble(projectGroups);
+            Map<Long,ProjectGroupDto> projectGroupDtoMap = PropertyUtils.extractPropertyFromDomainToMap(projectGroupDtos,
+                                                                                        "id",
+                                                                                                        Long.class);
+            /*Map<Long,List<ProjectGroup>> projectGroupMap = PropertyUtils.extractPropertyFromDomainToMapList(projectGroups,
+                                                                                            "departmentId",
+                                                                                                            Long.class);*/
+            for (ProjectGroup projectGroup : projectGroups) {
+                Long projectGroupId = projectGroup.getId();
+                Long departmentId = projectGroup.getDepartmentId();
+                List<ProjectGroupDto> projectGroupDtos1 = projectGroupDtoMaps.get(departmentId);
+                ProjectGroupDto projectGroupDto = projectGroupDtoMap.get(projectGroupId);
+                if (ObjectUtils.isNotNull(projectGroupDtos1)) {
+                    projectGroupDtos1.add(projectGroupDto);
+                } else {
+                    projectGroupDtos1 = Lists.newArrayList();
+                    projectGroupDtos1.add(projectGroupDto);
+                    projectGroupDtoMaps.put(departmentId,projectGroupDtos1);
+                }
+            }
+        }
+        return projectGroupDtoMaps;
     }
 
     @Override
@@ -95,6 +130,13 @@ public class ProjectGroupServiceImpl extends BaseServiceImpl<ProjectGroupMapper,
                 departmentMap.putAll(PropertyUtils.extractPropertyFromDomainToMap(departments,"id",Long.class));
             }
 
+            //获取项目组成员信息
+            List<Long> projectGroupIds = PropertyUtils.extractPropertyFromDomain(projectGroups,"id",Long.class);
+            Map<Long,List<String>> memberNamesMap = Maps.newHashMap();
+            if (ObjectUtils.isNotEmpty(projectGroupIds)) {
+                memberNamesMap.putAll(projectGroupMemberService.queryMembers(projectGroupIds));
+            }
+
             projectGroupDtos.addAll(BeanCloneUtils.clone(projectGroups,ProjectGroup.class,ProjectGroupDto.class));
             Map<Long,ProjectGroupDto> projectGroupDtoMap = PropertyUtils.extractPropertyFromDomainToMap(projectGroupDtos,"id",Long.class);
             for (ProjectGroup projectGroup : projectGroups) {
@@ -102,6 +144,7 @@ public class ProjectGroupServiceImpl extends BaseServiceImpl<ProjectGroupMapper,
                 ProjectGroupDto projectGroupDto = projectGroupDtoMap.get(id);
                 projectGroupDto.setGroupLeader(accountCredentialsMap.get(projectGroup.getGroupLeaderId()).getUserName());
                 projectGroupDto.setDepartment(departmentMap.get(projectGroup.getDepartmentId()).getName());
+                projectGroupDto.setGroupMembers(memberNamesMap.get(id));
             }
         }
         return projectGroupDtos;

@@ -19,6 +19,20 @@ import java.util.List;
 public interface IDepartmentService extends IBaseService<Department> {
 
     /**
+     * @param companyId
+     * @return {@link List<DepartmentDto>}
+     */
+    List<DepartmentDto> queryByCompanyId(Long companyId);
+
+    /**
+     * @param companyId
+     * @param pageNum
+     * @param pageSize
+     * @return {@link Page<DepartmentDto>}
+     */
+    Page<DepartmentDto> queryByCompanyId(Long companyId,Integer pageNum,Integer pageSize);
+
+    /**
      *
      * @param column
      * @param values

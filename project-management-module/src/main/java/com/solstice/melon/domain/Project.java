@@ -1,8 +1,8 @@
 package com.solstice.melon.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.solstice.melon.enums.ProgressEnum;
-import com.solstice.melon.enums.ProgressSituationEnum;
+import com.solstice.melon.enums.Progress;
+import com.solstice.melon.enums.ProgressSituation;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -23,7 +23,7 @@ public class Project extends BaseDomain implements Serializable {
     /**
      * 项目主要负责部门Id
      */
-    private Long departmentId;
+    private Long headerId;
     /**
      * 项目编号
      */
@@ -31,7 +31,7 @@ public class Project extends BaseDomain implements Serializable {
     /**
      * 项目甲方公司名称
      */
-    private String employeName;
+    private String employer;
     private String name;
     private Long typeId;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
@@ -48,16 +48,19 @@ public class Project extends BaseDomain implements Serializable {
     private Integer article;
     private Integer patent;
     private Integer softwareWorks;
-    private ProgressEnum progress;
-    private ProgressSituationEnum progressSituation;
+    private Progress progress;
+    private ProgressSituation progressSituation;
+    /**
+     * 项目负责组Id
+     */
     private Long ownerGroupId;
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public Long getHeaderId() {
+        return headerId;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setHeaderId(Long headerId) {
+        this.headerId = headerId;
     }
 
     public String getNumber() {
@@ -68,12 +71,12 @@ public class Project extends BaseDomain implements Serializable {
         this.number = number;
     }
 
-    public String getEmployeName() {
-        return employeName;
+    public String getEmployer() {
+        return employer;
     }
 
-    public void setEmployeName(String employeName) {
-        this.employeName = employeName;
+    public void setEmployer(String employer) {
+        this.employer = employer;
     }
 
     public String getName() {
@@ -172,19 +175,19 @@ public class Project extends BaseDomain implements Serializable {
         this.softwareWorks = softwareWorks;
     }
 
-    public ProgressEnum getProgress() {
+    public Progress getProgress() {
         return progress;
     }
 
-    public void setProgress(ProgressEnum progress) {
+    public void setProgress(Progress progress) {
         this.progress = progress;
     }
 
-    public ProgressSituationEnum getProgressSituation() {
+    public ProgressSituation getProgressSituation() {
         return progressSituation;
     }
 
-    public void setProgressSituation(ProgressSituationEnum progressSituation) {
+    public void setProgressSituation(ProgressSituation progressSituation) {
         this.progressSituation = progressSituation;
     }
 

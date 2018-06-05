@@ -32,6 +32,7 @@ public class ProjectGroup extends BaseDomain implements Serializable {
      */
     private String responsibility;
 
+    /**修改时间*/
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;

@@ -1,6 +1,11 @@
 package com.solstice.melon.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Intellij IDEA
@@ -31,6 +36,15 @@ public class DepartmentDto implements Serializable {
      * 部门简介
      */
     private String introduction;
+    /**
+     * 部门项目组
+     */
+    private List<String> groups;
+
+    /**修改时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -70,5 +84,21 @@ public class DepartmentDto implements Serializable {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public List<String> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<String> groups) {
+        this.groups = groups;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

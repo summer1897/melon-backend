@@ -1,7 +1,7 @@
 package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.solstice.melon.enums.CompanyStatusEnum;
+import com.solstice.melon.enums.CompanyStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -39,7 +39,7 @@ public class CompanyDto implements Serializable {
     /**
      * 公司注册资产
      */
-    private Double registredAssets;
+    private Double registeredAssets;
     /**
      * 公司简介
      */
@@ -55,7 +55,7 @@ public class CompanyDto implements Serializable {
     /**
      * 公司是否上市,0表示未上市，1表示已上市
      */
-    private CompanyStatusEnum companyStatus;
+    private CompanyStatus companyStatus;
     /**
      * 公司成立时间
      */
@@ -103,12 +103,12 @@ public class CompanyDto implements Serializable {
         this.address = address;
     }
 
-    public Double getRegistredAssets() {
-        return registredAssets;
+    public Double getRegisteredAssets() {
+        return registeredAssets;
     }
 
-    public void setRegistredAssets(Double registredAssets) {
-        this.registredAssets = registredAssets;
+    public void setRegisteredAssets(Double registeredAssets) {
+        this.registeredAssets = registeredAssets;
     }
 
     public String getIntroduction() {
@@ -135,11 +135,11 @@ public class CompanyDto implements Serializable {
         this.phone = phone;
     }
 
-    public CompanyStatusEnum getCompanyStatus() {
+    public CompanyStatus getCompanyStatus() {
         return companyStatus;
     }
 
-    public void setCompanyStatus(CompanyStatusEnum companyStatus) {
+    public void setCompanyStatus(CompanyStatus companyStatus) {
         this.companyStatus = companyStatus;
     }
 

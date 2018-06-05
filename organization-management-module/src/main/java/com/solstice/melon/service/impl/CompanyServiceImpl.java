@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 import com.solstice.melon.dao.CompanyMapper;
 import com.solstice.melon.domain.AccountCredentials;
 import com.solstice.melon.domain.Company;
-import com.solstice.melon.enums.CompanyStatusEnum;
+import com.solstice.melon.enums.CompanyStatus;
 import com.solstice.melon.service.IAccountCredentialsService;
 import com.solstice.melon.service.ICompanyService;
 import com.solstice.melon.service.dto.CompanyDto;
@@ -39,6 +39,16 @@ public class CompanyServiceImpl extends BaseServiceImpl<CompanyMapper,Company> i
     private IAccountCredentialsService accountCredentialsService;
 
     @Override
+    public List<CompanyDto> queryAll() {
+        return this.assemble(super.selectAll());
+    }
+
+    @Override
+    public Page<CompanyDto> queryAll(Integer pageNum, Integer pageSize) {
+        return this.assemblePage(super.selectAll(pageNum,pageSize));
+    }
+
+    @Override
     public CompanyDto queryOne(String name) {
         log.info("Service layer: CompanyServiceImpl.queryOne({})",name);
         Company company = this.selectOne(Condition.create().eq("name", name));
@@ -68,13 +78,13 @@ public class CompanyServiceImpl extends BaseServiceImpl<CompanyMapper,Company> i
     }
 
     @Override
-    public List<CompanyDto> queryByStatus(CompanyStatusEnum companyStatus) {
+    public List<CompanyDto> queryByStatus(CompanyStatus companyStatus) {
         log.info("Service layer: CompanyServiceImpl.queryByStatus({})",companyStatus.getDescription());
         return this.assemble(this.selectList(Condition.create().eq("company_status",companyStatus.getValue())));
     }
 
     @Override
-    public Page<CompanyDto> queryByStatus (CompanyStatusEnum companyStatus, Integer pageNum, Integer pageSize) {
+    public Page<CompanyDto> queryByStatus (CompanyStatus companyStatus, Integer pageNum, Integer pageSize) {
         log.info("Service layer: CompanyServiceImpl.queryByStatus({},{},{})",companyStatus.getDescription(),pageNum,pageSize);
         Page<Company> page = new Page<>(pageNum,pageSize);
         return this.assemblePage(this.selectPage(page,Condition.create().eq("company_status",companyStatus.getValue())));
