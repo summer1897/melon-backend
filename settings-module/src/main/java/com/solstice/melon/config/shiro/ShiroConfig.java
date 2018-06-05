@@ -35,7 +35,7 @@ public class ShiroConfig {
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost("127.0.0.1");
-        redisManager.setPassword("summer");
+        redisManager.setPassword("solstice");
         redisManager.setPort(6379);
         redisManager.setExpire(30*60);
         redisManager.setTimeout(3000);

@@ -7,7 +7,7 @@ spring:
   redis:
     database: 0
     host: 127.0.0.1
-    password: summer
+    password: solstice
     port: 6379
     pool:
       max-active: 8
@@ -25,9 +25,9 @@ spring:
 #      enabled: true
   datasource:
     name: repositpry
-    url: jdbc:mysql://127.0.0.1:3306/melon?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/melon?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
-    password: summer
+    password: solstice
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     filters: stat,wall,log4j

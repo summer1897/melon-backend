@@ -37,7 +37,7 @@
         <page-helper.version>1.1.2</page-helper.version>
         <shiro-spring.version>1.2.2</shiro-spring.version>
         <shiro-redis.version>2.4.2.1-RELEASE</shiro-redis.version>
-        <self-define-tools.version>4.0.0</self-define-tools.version>
+        <self-define-tools.version>5.0.0</self-define-tools.version>
         <current-project.version>1.0-SNAPSHOT</current-project.version>
         <swagger.version>2.7.0</swagger.version>
         <JWT.version>3.3.0</JWT.version>

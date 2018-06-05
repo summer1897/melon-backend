@@ -1,6 +1,5 @@
 package com.solstice.melon;
 
-import com.solstice.melon.enums.AcademicDegree;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
