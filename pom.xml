@@ -16,6 +16,7 @@
         <module>organization-management-module</module>
         <module>hr-management-module</module>
         <module>blog-module</module>
+        <module>code-generate-module</module>
     </modules>
 
 
