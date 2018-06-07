@@ -57,6 +57,11 @@
             <artifactId>blog-module</artifactId>
             <version>${melon.project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>code-generate-module</artifactId>
+            <version>${melon.project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
