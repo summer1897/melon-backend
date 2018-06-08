@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS work_experience (
   resume_id BIGINT NOT NULL COMMENT '所属简历Id',
   company VARCHAR(50) COMMENT '工作公司或单位',
   address VARCHAR(100) COMMENT '工作地址',
-  jop_position VARCHAR(50) COMMENT '工作职位',
+  job_position VARCHAR(50) COMMENT '工作职位',
   description VARCHAR(300) COMMENT '工作职位描述',
   reterence VARCHAR(30) COMMENT '证明人',
   start_time DATETIME NOT NULL DEFAULT now() COMMENT '工作起始时间',

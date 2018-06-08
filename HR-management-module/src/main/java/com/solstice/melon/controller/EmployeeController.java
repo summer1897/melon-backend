@@ -44,20 +44,24 @@ public class EmployeeController {
         log.info("Controller layer: EmployeeController.info({})", JSON.toJSONString(employee,true));
         Assert.notNull(employee,"你没有权限查看个人信息，请登录!");
 
-        List<ResumeVo> resumeVos = Lists.newArrayList();
-        EmployeeVo employeeVo = BeanCloneUtils.clone(employee, Principal.class, EmployeeVo.class);
-        if (ObjectUtils.isNotNull(employeeVo)) {
-            List<ResumeDto> resumeDtos = resumeManager.queryByUserId(employee.getId());
-            if (ObjectUtils.isNotEmpty(resumeDtos)) {
-                List<ResumeVo> resumeVos1 = BeanCloneUtils.deepClone(resumeDtos, ResumeDto.class, ResumeVo.class);
-                log.info("ResumeVo={}",JSON.toJSONString(resumeVos1,true));
-                resumeVos.addAll(resumeVos1);
+        try {
+            List<ResumeVo> resumeVos = Lists.newArrayList();
+            EmployeeVo employeeVo = BeanCloneUtils.clone(employee, Principal.class, EmployeeVo.class);
+            if (ObjectUtils.isNotNull(employeeVo)) {
+                List<ResumeDto> resumeDtos = resumeManager.queryByUserId(employee.getId());
+                if (ObjectUtils.isNotEmpty(resumeDtos)) {
+                    List<ResumeVo> resumeVos1 = BeanCloneUtils.deepClone(resumeDtos, ResumeDto.class, ResumeVo.class);
+                    log.info("ResumeVo={}",JSON.toJSONString(resumeVos1,true));
+                    resumeVos.addAll(resumeVos1);
+                }
             }
-        }
 
-        if (ObjectUtils.isNotEmpty(resumeVos)) {
-            employeeVo.setResumeVos(resumeVos);
-            return ResultVo.success(HttpStatus.STATUS_OK,employeeVo);
+            if (ObjectUtils.isNotEmpty(resumeVos)) {
+                employeeVo.setResumeVos(resumeVos);
+                return ResultVo.success(HttpStatus.STATUS_OK,employeeVo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return ResultVo.fail();
     }
