@@ -1,7 +1,6 @@
 package com.solstice.melon.aspects;
 
 import com.solstice.melon.annotations.DbSource;
-import com.solstice.melon.dbsource.DynamicDataSource;
 import com.summer.base.utils.ObjectUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -25,15 +24,15 @@ import java.lang.reflect.Method;
  * @Version 1.0
  * @Description
  **/
-@Aspect
+/*@Aspect
 @Order(-1) //保证该注释在@Tansactional之前运行
-@Component
+@Component*/
 public class DynamicDataSourceAspect {
 
     private static final Logger log = LoggerFactory.getLogger(DynamicDataSourceAspect.class);
 
 
-    @Before("execution(* com.solstice.melon.dao..*.*(..))")
+    /*@Before("execution(* com.solstice.melon.dao..*.*(..))")
     public void switchDataSource(JoinPoint joinPoint) throws Throwable {
         log.info("DynamicDataSourceAspect.switchDataSource()");
         String sourceName = "";
@@ -75,6 +74,6 @@ public class DynamicDataSourceAspect {
     public void after(JoinPoint point) {
         log.info("DynamicDataSourceAspect.after()");
         DynamicDataSource.clearDataSource();
-    }
+    }*/
 
 }

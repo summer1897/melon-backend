@@ -2,14 +2,16 @@ package com.solstice.melon.db;
 
 import com.summer.base.utils.StringUtils;
 
+import java.util.Map;
+
 /**
- * @ClassName SQL
+ * @ClassName SQLDialect
  * @Author solstice
  * @Date 2018/6/7 9:50
  * @Version 1.0
  * @Description 数据库SQL语句接口定义
  **/
-public interface SQL {
+public interface SQLDialect {
 
     /**
      *
@@ -60,10 +62,42 @@ public interface SQL {
     }
 
     /**
-     * 获取数据库连接URL
+     * 拼接sql查询字段
+     * @param sql
+     * @param columns
      * @return {@link String}
      */
-    String url();
+    default String appendColumns(String sql,String...columns) {
+        StringBuilder sb = new StringBuilder();
+        if (StringUtils.isNotEmpty(sql) && StringUtils.isAllNotEmpty(columns)) {
+            sb.append(sql);
+            int i = 0;
+            for (; i < columns.length - 1; ++i) {
+                sb.append(columns[i]).append(",");
+            }
+            sb.append(columns[i]).append(" ");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 获取数据库连接URL
+     * @param ip
+     * @param port
+     * @param dbName
+     * @return {@link String}
+     */
+    String url(String ip,Integer port,String dbName);
+
+    /**
+     * 获取数据库连接URL
+     * @param ip
+     * @param port
+     * @param dbName
+     * @param params
+     * @return {@link String}
+     */
+    String url(String ip, Integer port, String dbName, Map<String,String> params);
 
     /**
      * 获取数据库连接驱动类全名
@@ -74,14 +108,17 @@ public interface SQL {
     /**
      * 获取当前数据库所有表明SQL语句
      * @param dbName
+     * @param columns 指定返回表字段信息
      * @return {@link String}
      */
-    String allTableNames(String dbName);
+    String allTableNames(String dbName,String...columns);
 
     /**
-     * 获取某表所有字段信息SQL
+     * 获取指定数据库某表所有字段信息SQL
+     * @param dbName
      * @param tableName
+     * @param columns 指定返回表字段信息
      * @return {@link String}
      */
-    String allTableColumns(String tableName);
+    String allTableColumns(String dbName,String tableName,String...columns);
 }
