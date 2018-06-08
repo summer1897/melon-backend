@@ -1,8 +1,8 @@
 package com.solstice.melon.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.solstice.melon.enums.ProgressEnum;
-import com.solstice.melon.enums.ProgressSituationEnum;
+import com.solstice.melon.enums.Progress;
+import com.solstice.melon.enums.ProgressSituation;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -44,8 +44,8 @@ public class ProjectDto implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
-    private ProgressEnum progress;
-    private ProgressSituationEnum progressSituation;
+    private Progress progress;
+    private ProgressSituation progressSituation;
     /**
      * 项目负责组
      */

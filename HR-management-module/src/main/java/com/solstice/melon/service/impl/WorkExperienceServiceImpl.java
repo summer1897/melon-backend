@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @Description
  */
 @Service("workExperienceService")
-public class WorkExperienceServiceImpl extends BaseServiceImpl<WorkExperienceMapper,WorkExperience>
+public class WorkExperienceServiceImpl extends BaseResumeServiceImpl<WorkExperienceMapper,WorkExperience>
                                                 implements IWorkExperienceService {
 
     private static final Logger log = LoggerFactory.getLogger(WorkExperienceServiceImpl.class);

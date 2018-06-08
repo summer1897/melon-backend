@@ -3,6 +3,7 @@ package com.solstice.melon.service.impl;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.solstice.melon.annotations.DbSource;
 import com.solstice.melon.dao.UserMapper;
 import com.solstice.melon.domain.User;
 import com.solstice.melon.service.IUserService;
@@ -39,6 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User>
 
 
     @Override
+    @DbSource(name = "")
     public List<User> queryAll() {
         log.info("Service layer========================>UserServiceImpl.queryAll()");
         return selectList(Condition.EMPTY);

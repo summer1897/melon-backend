@@ -53,7 +53,12 @@ public class ResumeController {
         log.info("Controller layer: ResumeController.lists({})",userId);
 
         Assert.notNull(userId,"用户不存在 userId is null");
-        List<ResumeDto> resumeDtos = resumeManager.queryByUserId(userId);
+        List<ResumeDto> resumeDtos = null;
+        try {
+            resumeDtos = resumeManager.queryByUserId(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (ObjectUtils.isNotEmpty(resumeDtos)) {
             return ResultVo.success(HttpStatus.STATUS_OK,resumeDtos);
         }

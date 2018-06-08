@@ -11,16 +11,16 @@ import java.io.Serializable;
  * @Time 10:53
  * @Description
  */
-public enum CompanyStatusEnum implements BaseEnum {
+public enum CompanyStatus implements BaseEnum {
 
     UNLISTED(0,"未上市","Unlisted"),
     LISTED(1,"上市","Listed");
 
-    private int value;
-    private String description;
-    private String eDescription;
+    int value;
+    String description;
+    String eDescription;
 
-    CompanyStatusEnum(int value, String description, String eDescription) {
+    CompanyStatus(int value, String description, String eDescription) {
         this.value = value;
         this.description = description;
         this.eDescription = eDescription;

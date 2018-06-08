@@ -18,6 +18,11 @@
             <artifactId>common-module</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.solstice.melon</groupId>
+            <artifactId>code-generate-module</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <properties>

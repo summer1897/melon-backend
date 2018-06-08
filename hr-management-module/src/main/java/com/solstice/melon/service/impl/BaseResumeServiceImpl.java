@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.solstice.melon.service.IBaseService;
+import com.solstice.melon.service.IBaseResumeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +19,9 @@ import java.util.List;
  * @Time 10:19
  * @Description
  */
-public class BaseServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,T> implements IBaseService<T> {
+public class BaseResumeServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,T> implements IBaseResumeService<T> {
 
-    private static final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(BaseResumeServiceImpl.class);
 
     @Override
     public List<T> queryByResumeId(Long resumeId) {

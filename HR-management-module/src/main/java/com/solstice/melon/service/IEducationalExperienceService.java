@@ -12,6 +12,6 @@ import com.solstice.melon.domain.EducationalExperience;
  * @Time 9:29
  * @Description 教育经历Service层操作
  */
-public interface IEducationalExperienceService extends IBaseService<EducationalExperience> {
+public interface IEducationalExperienceService extends IBaseResumeService<EducationalExperience> {
 
 }

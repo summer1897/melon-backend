@@ -11,5 +11,5 @@ import com.solstice.melon.domain.SchoolReward;
  * @Time 9:57
  * @Description
  */
-public interface ISchoolRewardService extends IBaseService<SchoolReward> {
+public interface ISchoolRewardService extends IBaseResumeService<SchoolReward> {
 }

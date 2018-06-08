@@ -1,6 +1,10 @@
 package com.solstice.melon.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Intellij IDEA
@@ -27,6 +31,11 @@ public class ProjectGroup extends BaseDomain implements Serializable {
      * 项目组主要职责
      */
     private String responsibility;
+
+    /**修改时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     public ProjectGroup() {
     }
@@ -67,5 +76,13 @@ public class ProjectGroup extends BaseDomain implements Serializable {
 
     public void setResponsibility(String responsibility) {
         this.responsibility = responsibility;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

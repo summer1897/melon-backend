@@ -21,6 +21,7 @@
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES (1000936662225932289,'中国电建集团贵州电力设计院研究院有限公司',997325005979074561,'央企','贵州省贵阳市遵义路133号','83603.83','贵州电力设计研究院前身为贵州电力设计院，1958年8月建院，位于贵阳市遵义路56号。贵州电力设计研究院属中国电力建设集团有限公司，是贵州省唯一的甲级电力设计研究院，具有国家建设部颁发的勘察综合类甲级证书、电力工程设计甲级证书、电力工程咨询甲级证书、电力工程总承包甲级证书、建筑工程设计乙级证书及测绘资质乙级证书等，主要承担电网规划、大中型火力发电工程、输变电工程以及民用建筑工程的勘测、设计、监理、咨询和工程总承包任务。','gzed@sina.com','08514548',0,'1958-09-27 00:00:00','2018-05-28 10:53:07','2018-05-28 10:53:07'),(1000941346412060673,'网易（杭州）',997325005979074561,'互联网技术公司','浙江省杭州市滨江区网商路33号','13760.0','网易网站为互联网用户提供了以内容、社区和电子商务服务为核心的中文在线服务。2010年10月11日，中国领先的门户网站网易宣布将旗下新闻资讯类频道进行新一轮的页面改版，新版本首次提出“有态度的门户”的内容建设理念。','NeatEase@corp.netease.com','0571-26201163',1,'1997-06-01 00:00:00','2018-05-28 11:26:28','2018-05-28 11:26:28');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -30,6 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (1000993941251973122,1000936662225932289,997325752758124545,'地理信息中心','地理信息软件研发','2018-05-28 16:51:46','2018-05-28 14:51:20','2018-05-28 16:17:12');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,12 +84,40 @@ LOCK TABLES `project` WRITE;
 UNLOCK TABLES;
 
 --
+-- Dumping data for table `project_company`
+--
+
+LOCK TABLES `project_company` WRITE;
+/*!40000 ALTER TABLE `project_company` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_company` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `project_department`
+--
+
+LOCK TABLES `project_department` WRITE;
+/*!40000 ALTER TABLE `project_department` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `project_group`
 --
 
 LOCK TABLES `project_group` WRITE;
 /*!40000 ALTER TABLE `project_group` DISABLE KEYS */;
+INSERT INTO `project_group` VALUES (1001021956451295233,997325005979074561,1000993941251973122,'开发一组','二维Gis研发','2018-05-28 16:45:30','2018-05-28 16:45:30','2018-05-28 00:00:00'),(1001023594222149634,997325005979074561,1000993941251973122,'开发二组','电力四维','2018-05-28 16:45:30','2018-05-28 16:45:30','2018-05-28 00:00:00'),(1001023734605504513,997325005979074561,1000993941251973122,'开发三组','Java相关项目开发','2018-05-28 16:45:30','2018-05-28 16:45:30','2018-05-28 00:00:00');
 /*!40000 ALTER TABLE `project_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `project_group_member`
+--
+
+LOCK TABLES `project_group_member` WRITE;
+/*!40000 ALTER TABLE `project_group_member` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_group_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -114,7 +144,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `resume` WRITE;
 /*!40000 ALTER TABLE `resume` DISABLE KEYS */;
-INSERT INTO `resume` VALUES (998462921537581057,997325005979074561,'admin','/images/admin.jpg',0,0,2,'11',7,7,'15268528314','admin@sina.com','string',1,'2018-05-21 00:00:00','2018-05-21 14:54:15','2018-05-21 14:54:15');
+INSERT INTO `resume` VALUES (998462921537581057,997325005979074561,'admin','/images/admin.jpg',0,0,2,'11',7,7,'15268528314','admin@sina.com','string',1,'2018-05-21 00:00:00','2018-05-21 14:54:15','2018-05-21 14:54:15'),(999110944034668546,997325752758124545,'admin','/images/admin.jpg',0,0,2,'1',8,8,'18883308404','admin@sina.com','打羽毛球',1,'1985-05-23 00:00:00','2018-05-23 10:11:30','2018-05-23 10:11:30');
 /*!40000 ALTER TABLE `resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,15 +206,6 @@ INSERT INTO `user` VALUES (997325005979074561,'solstice','solstice','iKXM0haPQrt
 UNLOCK TABLES;
 
 --
--- Dumping data for table `user_group`
---
-
-LOCK TABLES `user_group` WRITE;
-/*!40000 ALTER TABLE `user_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `user_role`
 --
 
@@ -221,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-22 17:31:26
+-- Dump completed on 2018-05-28 16:57:34

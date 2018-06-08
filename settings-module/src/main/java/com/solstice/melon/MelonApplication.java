@@ -1,9 +1,9 @@
 package com.solstice.melon;
 
-import com.solstice.melon.enums.AcademicDegree;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -15,7 +15,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @Time 10:19
  * @Description
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        DataSourceAutoConfiguration.class
+})
 @MapperScan("com.solstice.melon.dao*")
 @ComponentScan("com.solstice.melon")
 public class MelonApplication {
